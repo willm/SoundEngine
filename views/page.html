@@ -6,7 +6,7 @@
 <body>
 	<audio src="gameboy.ogg" type="audio/ogg" onaudiowritten="audioWritten(event);"></audio>
 	<a href="#">click me</a>
-	<div class="row">
+	<div class="row kick">
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -16,7 +16,7 @@
 		<div class="tick"></div>
 		<div class="tick"></div>
 	</div>
-	<div class="row">
+	<div class="row snare">
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -47,26 +47,7 @@
 		<div class="tick"></div>
 	</div>
 	<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<!--<script type="text/javascript" language="javascript" src="script.js"></script>-->
+	<script type="text/javascript" language="javascript" src="script.js"></script>
 	<script type="text/javascript" language="javascript" src="BufferLoader.js"></script>
-<script type="text/javascript" src="buffer.js"></script>
-	
-	<script type="text/javascript" language="javascript" charset="utf-8">
-	/*	$('a').click(function(){
-				$('audio')[0].play();
-			});
-			
-		function audioWritten(event) {
-		  var samples = event.mozFrameBuffer;
-		  var time    = event.mozTime;
-console.log(event);
-		  for (var i=0, slen=samples.length; i<slen; i++) {
-			// Do something with the audio data as it is played.
-			console.log(event);
-			processSample(samples[i], channels, rate);
-			
-		  }
-		}*/
-	</script>
-	
+	<script type="text/javascript" src="buffer.js"></script>	
 </body>
