@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Spectrum Example</title>
+  </head>
+  <body>
+    <audio src="AmenBreak.wav"
+           controls="true"
+           onloadedmetadata="loadedMetadata(event);"
+           onaudiowritten="audioWritten(event);" loop="true">
+    </audio>
+    <div><canvas id="fft" width="512" height="200"></canvas></div>
+	 </body>
+</html>
+
