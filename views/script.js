@@ -1,4 +1,5 @@
 $(function(){
+	var soundEngine = new SoundEngine();
 	var ticks = $('.kick .tick');
 	var hits = [];
 	
@@ -11,6 +12,10 @@ $(function(){
 			};
 		}(i));
 	}
+	
+	$('a').click(function (){
+		soundEngine.playBar(soundEngine.list, hits);
+	});
 
 	function toggle (element){
 		var isOn = element.css('background-color') !== 'rgb(255, 0, 0)';
