@@ -1,6 +1,12 @@
-function SoundEngine(){
+function SoundEngine(bpm, kicks){
+	this.tempo = bpm; // BPM (beats per minute)
+	
+	this.eighthNoteTime = (60 / this.tempo) / 2;
+	this.kicks = kicks;
 	var me = this;
+	this.isPlaying = false;
 	this.list;
+	this.barCount = 0;
 	this.context = new webkitAudioContext();
 	this.bufferLoader = new BufferLoader(this.context,
 			['kick.wav',
@@ -19,22 +25,30 @@ function SoundEngine(){
 	  source.connect(this.context.destination);
 	  source.noteOn(time);
 	}
-	
-	this.playBar = function (bufferList, kicks){
-		var kick = bufferList[0];
-		var snare = bufferList[1];
-		var hihat = bufferList[2];
-		var startTime = this.context.currentTime + 0.100;
-		var tempo = 160; // BPM (beats per minute)
-		var eighthNoteTime = (60 / tempo) / 2;
 		
-		for (var bar = 0; bar < 16; bar++) {
-			var time = startTime + bar * 8 * eighthNoteTime;
-			for (var i=0; i < kicks.length; i++) {
-				if(kicks[i]){
-					this.playSound(kick,(time)+i * eighthNoteTime);
-				}
+	this.playBar = function (){
+		var kick = this.list[0];
+		
+		var time = this.startTime + this.barCount * 8 * this.eighthNoteTime;
+		for (var i=0; i < this.kicks.length; i++) {
+			if(this.kicks[i]){
+				this.playSound(kick,(time)+i *this.eighthNoteTime);
 			}
 		}
 	}
+	
+	this.playSequence = function (bufferList){
+		return function(that){
+				that.playing=setInterval(function(){
+				console.log('bar : ',that.barCount);
+				that.playBar();
+				that.barCount++;
+			},(8000 * that.eighthNoteTime));
+		}(this);
+	}
+	
+	this.setStartTime = function  (){ 
+		this.startTime = this.context.currentTime + 0.100;
+	}
+	
 }

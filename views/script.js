@@ -1,5 +1,5 @@
 $(function(){
-	var soundEngine = new SoundEngine();
+	var soundEngine;
 	var ticks = $('.kick .tick');
 	var hits = [];
 	
@@ -13,8 +13,20 @@ $(function(){
 		}(i));
 	}
 	
+	soundEngine = new SoundEngine(130,hits);
+	
 	$('a').click(function (){
-		soundEngine.playBar(soundEngine.list, hits);
+		if (soundEngine.isPlaying){
+			console.log('stop');
+			soundEngine.isPlaying = false;
+			clearInterval(soundEngine.playing);
+		}
+		else {
+			soundEngine.isPlaying = true;
+			soundEngine.setStartTime();
+			soundEngine.playSequence(hits);
+		}
+		
 	});
 
 	function toggle (element){
