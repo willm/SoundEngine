@@ -1,19 +1,21 @@
 $(function(){
 	var soundEngine;
-	var ticks;
+	var tickElements;
 	var hits = [[],[],[],[]];
-	var channels = $('.channel');
-	for (var i=0; i<channels.length; i++ ) {
-		ticks = $(channels[i]).children();
-		for (var j=0; j<ticks.length; j++) {
-			hits[i][j] = 0;
-			$(ticks[j]).click(function(channel, tick){
+	var channelElements = $('.channel');
+	var channels = [];
+	
+	for (var i=0; i<channelElements.length; i++ ) {
+		tickElements = $(channelElements[i]).children();
+		channels[i] = new Channel(tickElements.length);
+		for (var j=0; j<tickElements.length; j++) {
+			$(tickElements[j]).click(function(channel, tick){
 				return function  (){
+					channel.setHit(tick);
 					console.log('channel: '+channel+'tick: '+tick);
-					hits[channel][tick] = hits[channel][tick] === 0 ? 1 : 0;
 					toggle($(this));
 				};
-			}(i,j));
+			}(channels[i],j));
 		}
 	}
 	
@@ -35,7 +37,6 @@ $(function(){
 
 	function toggle (element){
 		var isOn = element.css('background-color') !== 'rgb(255, 0, 0)';
-	
 		if(isOn)
 			element.css('background-color', 'red');
 		else 
