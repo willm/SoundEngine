@@ -1,16 +1,20 @@
 $(function(){
 	var soundEngine;
-	var ticks = $('.kick .tick');
-	var hits = [];
-	
-	for (var i=0; i<ticks.length; i++) {
-		hits[i] = 0;
-		$(ticks[i]).click(function(x){
-			return function  (){
-				hits[x] = hits[x] === 0 ? 1 : 0;
-				toggle($(this));
-			};
-		}(i));
+	var ticks;
+	var hits = [[],[],[],[]];
+	var channels = $('.channel');
+	for (var i=0; i<channels.length; i++ ) {
+		ticks = $(channels[i]).children();
+		for (var j=0; j<ticks.length; j++) {
+			hits[i][j] = 0;
+			$(ticks[j]).click(function(channel, tick){
+				return function  (){
+					console.log('channel: '+channel+'tick: '+tick);
+					hits[channel][tick] = hits[channel][tick] === 0 ? 1 : 0;
+					toggle($(this));
+				};
+			}(i,j));
+		}
 	}
 	
 	soundEngine = new SoundEngine(130,hits);
