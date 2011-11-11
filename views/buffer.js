@@ -37,12 +37,12 @@ function SoundEngine(bpm, kicks){
 		}
 	}
 	
-	this.playSequence = function (bufferList){
+	this.playSequence = function (){
 		return function(that){
 				that.playing=setInterval(function(){
-				console.log('bar : ',that.barCount);
-				that.playBar();
-				that.barCount++;
+					console.log('bar : ',that.barCount);
+					that.playBar();
+					that.barCount++;
 			},(8000 * that.eighthNoteTime));
 		}(this);
 	}
