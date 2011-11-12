@@ -1,7 +1,6 @@
 $(function(){
 	var soundEngine;
 	var tickElements;
-	var hits = [[],[],[],[]];
 	var channelElements = $('.channel');
 	var channels = [];
 	
@@ -19,7 +18,7 @@ $(function(){
 		}
 	}
 	
-	soundEngine = new SoundEngine(130,hits);
+	soundEngine = new SoundEngine(130);
 	
 	$('a').click(function (){
 		if (soundEngine.isPlaying){
@@ -30,7 +29,7 @@ $(function(){
 		else {
 			soundEngine.isPlaying = true;
 			soundEngine.setStartTime();
-			soundEngine.playSequence(hits);
+			soundEngine.playSequence(channels);
 		}
 		
 	});
