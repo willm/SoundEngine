@@ -14,5 +14,26 @@
 }
 
 body{
-background-color: black;
+	background-color: black;
+	color:red;
+}
+
+/* Icons*/
+ul#icons{
+	margin:0px;
+	padding:0px;
+}
+
+ul#icons li {
+	margin: 2px; 
+	position: relative; 
+	padding: 4px 0; 
+	cursor: pointer; 
+	float: left;  
+	list-style: none;
+}
+
+ul#icons span.ui-icon {
+	float: left; 
+	margin: 0 4px;
 }

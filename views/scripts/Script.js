@@ -20,9 +20,26 @@ $(function(){
 	
 	soundEngine = new SoundEngine(130);
 	
-	$('a').click(function (){
+	$('#play_pause').click(function (){
+		startStop();
+		console.log($(this).attr('class').indexOf('ui-icon-play') >= 1);
+		if($(this).attr('class').indexOf('ui-icon-play') >= 1)
+			$(this).removeClass('ui-icon-play').addClass('ui-icon-stop');
+		else
+			$(this).removeClass('ui-icon-stop').addClass('ui-icon-play');
+	});
+	
+	$(window).keypress(function  (e){
+		//0 and 32 are the spacebar
+		if (e.keyCode === 0 || e.keyCode === 32){
+			$('#play_pause').trigger('click');
+			e.stopPropagation();
+		}
+	})
+	
+	function startStop (){
 		if (soundEngine.isPlaying){
-			console.log('stop');
+			console.log('Stop');
 			soundEngine.isPlaying = false;
 			clearInterval(soundEngine.playing);
 		}
@@ -31,8 +48,7 @@ $(function(){
 			soundEngine.setStartTime();
 			soundEngine.playSequence(channels);
 		}
-		
-	});
+	}
 
 	function toggle (element){
 		var isOn = element.css('background-color') !== 'rgb(255, 0, 0)';

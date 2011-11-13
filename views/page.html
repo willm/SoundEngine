@@ -1,12 +1,19 @@
 <!doctype html>
 <head>
 	<title>My Page</title>
-<link rel="stylesheet" href="style.css" type="text/css" />	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="stylesheet" href="lib/jquery-ui/css/ui-darkness/jquery-ui-1.8.16.custom.css" type="text/css" />
 </head>
 <body>
-	<audio src="gameboy.ogg" type="audio/ogg" onaudiowritten="audioWritten(event);"></audio>
-	<a href="#">click me</a>
+	<ul id="icons">
+		<li class="ui-state-default ui-corner-all"><span id="play_pause" class="ui-icon ui-icon-play"></span></li>
+		<!--<li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-stop"></span></li>-->
+	</ul>
+	<hr style="clear:left"/>
 	<div class="row channel">
+		<form style="float:left">
+			<label for="1">Channel 1 <br/></label><input type="text" id="1"/>
+		</form>
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -17,6 +24,9 @@
 		<div class="tick"></div>
 	</div>
 	<div class="row channel">
+		<form style="float:left">
+			<label for="1">Channel 2 <br/></label><input type="text" id="2"/>
+		</form>
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -27,6 +37,9 @@
 		<div class="tick"></div>
 	</div>
 	<div class="row channel">
+		<form style="float:left">
+			<label for="1">Channel 3 <br/></label><input type="text" id="3"/>
+		</form>
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -37,6 +50,9 @@
 		<div class="tick"></div>
 	</div>
 	<div class="row channel">
+		<form style="float:left">
+			<label for="1">Channel 4 <br/></label><input type="text" id="4"/>
+		</form>
 		<div class="tick"></div>
 		<div class="tick"></div>
 		<div class="tick"></div>
@@ -46,10 +62,10 @@
 		<div class="tick"></div>
 		<div class="tick"></div>
 	</div>
-	<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-	<script type="text/javascript" language="javascript" src="jquery-1.6.2.min.js"></script>
-	<script type="text/javascript" language="javascript" src="script.js"></script>
-	<script type="text/javascript" language="javascript" src="BufferLoader.js"></script>
-	<script type="text/javascript" src="buffer.js"></script>
-	<script type="text/javascript" language="javascript" src="channel.js"></script>
+	<!--<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>-->
+	<script type="text/javascript" language="javascript" src="scripts/lib/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="scripts/Script.js"></script>
+	<script type="text/javascript" language="javascript" src="scripts/BufferLoader.js"></script>
+	<script type="text/javascript" src="scripts/SoundEngine.js"></script>
+	<script type="text/javascript" language="javascript" src="scripts/Channel.js"></script>
 </body>
