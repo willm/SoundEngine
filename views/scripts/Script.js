@@ -4,38 +4,53 @@ $(function(){
 	var channelElements = $('.channel');
 	var channels = [];
 	
-	for (var i=0; i<channelElements.length; i++ ) {
-		tickElements = $(channelElements[i]).children();
-		channels[i] = new Channel(tickElements.length);
-		for (var j=0; j<tickElements.length; j++) {
-			$(tickElements[j]).click(function(channel, tick){
-				return function  (){
-					channel.setHit(tick);
-					console.log('channel: '+channel+'tick: '+tick);
-					toggle($(this));
-				};
-			}(channels[i],j));
-		}
+	soundEngine = new SoundEngine(140);
+	
+	setUpPlayButton ();
+	
+	hookUpChannels();
+	
+	function setUpPlayButton (){
+		var playbutton = $('#play_pause');
+		
+		playbutton.button({
+            icons: {primary: "ui-icon-play"},
+            text : false
+        });
+        
+		playbutton.click(function (){
+			var isPlayButton = $(this).children('.ui-icon-play').length;
+			startStop();
+			if(isPlayButton)
+				$(this).button({icons:{primary:'ui-icon-stop'}})
+			else
+				$(this).button({icons:{primary:'ui-icon-play'}})
+		});
+		
+		$(window).keypress(function  (e){
+			var spaceBar = (e.keyCode === 0 || e.keyCode === 32);
+			if (spaceBar){
+				$('#play_pause').trigger('click');
+				e.stopPropagation();
+			}
+		})
 	}
 	
-	soundEngine = new SoundEngine(130);
-	
-	$('#play_pause').click(function (){
-		startStop();
-		console.log($(this).attr('class').indexOf('ui-icon-play') >= 1);
-		if($(this).attr('class').indexOf('ui-icon-play') >= 1)
-			$(this).removeClass('ui-icon-play').addClass('ui-icon-stop');
-		else
-			$(this).removeClass('ui-icon-stop').addClass('ui-icon-play');
-	});
-	
-	$(window).keypress(function  (e){
-		//0 and 32 are the spacebar
-		if (e.keyCode === 0 || e.keyCode === 32){
-			$('#play_pause').trigger('click');
-			e.stopPropagation();
+	function hookUpChannels (){
+		for (var i=0; i<channelElements.length; i++ ) {
+			tickElements = $(channelElements[i]).children();
+			channels[i] = new Channel(tickElements.length);
+			for (var j=0; j<tickElements.length; j++) {
+				$(tickElements[j]).click(function(channel, tick){
+					return function  (){
+						channel.setHit(tick);
+						console.log('channel: '+channel+'tick: '+tick);
+						toggle($(this));
+					};
+				}(channels[i],j));
+			}
 		}
-	})
+	}
 	
 	function startStop (){
 		if (soundEngine.isPlaying){
