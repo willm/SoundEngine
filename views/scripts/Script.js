@@ -1,9 +1,9 @@
 $(function(){
-	var soundEngine;
-	var tickElements;
-	var channelElements = $('.channel');
-	var channels = [];
-	var tempo = $('#tempo').text();
+	var soundEngine,
+		tickElements,
+		channelElements = $('.channel'),
+		channels = [],
+		tempo = $('#tempo').text();
 
 	soundEngine = new SoundEngine(tempo);
 	
@@ -23,9 +23,9 @@ $(function(){
 			var isPlayButton = $(this).children('.ui-icon-play').length;
 			startStop();
 			if(isPlayButton)
-				$(this).button({icons:{primary:'ui-icon-stop'}})
+				$(this).button({icons:{primary:'ui-icon-stop'}});
 			else
-				$(this).button({icons:{primary:'ui-icon-play'}})
+				$(this).button({icons:{primary:'ui-icon-play'}});
 		});
 		
 		$(window).keypress(function  (e){
@@ -34,7 +34,7 @@ $(function(){
 				$('#play_pause').trigger('click');
 				e.stopPropagation();
 			}
-		})
+		});
 	}
 	
 	function hookUpChannels (){

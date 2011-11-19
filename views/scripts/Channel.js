@@ -6,7 +6,6 @@ function Channel (numberOfTicks, sample, number){
 	
 	var bufferLoader = new BufferLoader();
 	
-	
 	for (var i = 0; i<numberOfTicks; i++) {
 		this.hits[i] = 0;
 	}
@@ -47,11 +46,6 @@ Channel.prototype.loadBuffer = function(url, index) {
 
   request.send();
 }
-
-
-
-
-
 
 
 var AudioContext = (function(){
