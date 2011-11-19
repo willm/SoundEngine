@@ -1,0 +1,28 @@
+{
+	"name": "SoundEngine",
+	"version": "0.1.0",
+	"description": "",
+	"homepage": [
+		"",
+		"http://github.com/willm/SoundEngine",
+		"http://github.com/willm/SoundEngine"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/willm/SoundEngine.git"
+	},
+	"keywords": [],
+	"author": "Will Munn <willmunn@hotmail.com>",
+	"licenses": [
+		"MIT"
+	],
+	"engines": [
+		"node >= 0.4.1 <= 0.5.0"
+	],
+	"main": "server.js",
+	"dependencies": {
+		"express": "2.4.5",
+		"jade": "0.14.2",
+		"path": "0.4.9"
+	}
+}
