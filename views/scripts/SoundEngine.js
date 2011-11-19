@@ -6,8 +6,8 @@ function SoundEngine(bpm){
 	this.isPlaying = false;
 	this.list;
 	this.barCount = 0;
-	this.context = new webkitAudioContext();
-	this.bufferLoader = new BufferLoader(this.context,
+	this.context = AudioContext.getInstance();
+	this.bufferLoader = new BufferLoader(
 			['samples/kick.wav',
 			'samples/snare.wav',
 			'samples/808 highhat.wav',
@@ -28,10 +28,10 @@ function SoundEngine(bpm){
 		
 	this.playBar = function (channel, bufferNumber){
 		var buffer = this.list[bufferNumber];
-		console.log(channel);
 		var time = this.startTime + this.barCount * 8 * this.eighthNoteTime;
 		for (var i=0; i < channel.hits.length; i++) {
 			if(channel.hits[i]){
+				console.log((time)+i *this.eighthNoteTime);
 				this.playSound(buffer,(time)+i *this.eighthNoteTime);
 			}
 		}
@@ -50,7 +50,7 @@ function SoundEngine(bpm){
 	}
 	
 	this.setStartTime = function  (){ 
-		this.startTime = this.context.currentTime + 0.100;
+		this.startTime = this.context.currentTime+ 0.100;
 	}
 	
 }

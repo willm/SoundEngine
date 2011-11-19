@@ -3,8 +3,9 @@ $(function(){
 	var tickElements;
 	var channelElements = $('.channel');
 	var channels = [];
-	
-	soundEngine = new SoundEngine(140);
+	var tempo = $('#tempo').text();
+
+	soundEngine = new SoundEngine(tempo);
 	
 	setUpPlayButton ();
 	
@@ -14,10 +15,10 @@ $(function(){
 		var playbutton = $('#play_pause');
 		
 		playbutton.button({
-            icons: {primary: "ui-icon-play"},
-            text : false
-        });
-        
+			icons: {primary: "ui-icon-play"},
+			text : false
+		});
+
 		playbutton.click(function (){
 			var isPlayButton = $(this).children('.ui-icon-play').length;
 			startStop();
@@ -38,7 +39,7 @@ $(function(){
 	
 	function hookUpChannels (){
 		for (var i=0; i<channelElements.length; i++ ) {
-			tickElements = $(channelElements[i]).children();
+			tickElements = $(channelElements[i]).children('.tick');
 			channels[i] = new Channel(tickElements.length);
 			for (var j=0; j<tickElements.length; j++) {
 				$(tickElements[j]).click(function(channel, tick){

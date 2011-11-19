@@ -16,12 +16,20 @@
 body{
 	background-color: black;
 	color:red;
+	font-family:sans-serif;
 }
 
 button{
 	height:35px;
+	float:left;
 }
 
-p{
+.sample_path{
 	width:200px;
+}
+
+#tempo{
+	margin:10px;
+	font-weight:bold;
+	float:left;
 }
