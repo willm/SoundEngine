@@ -7,7 +7,7 @@ server = express.createServer();
 server.configure(function configureAppAndMiddleware() {
 	server.set('view engine', 'jade');
 	server.set('view', path.join(__dirname,'views'));
-	server.use(express['static']path.join(__dirname,'views'));
+	server.use(express['static'](__dirname + '/views'));
 });
 
 
