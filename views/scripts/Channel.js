@@ -5,8 +5,6 @@ function Channel (numberOfTicks, sample, number){
 	this.buffer;
 	this.context = AudioContext.getInstance();
 	
-	var bufferLoader = new BufferLoader();
-	
 	for (var i = 0; i<numberOfTicks; i++) {
 		this.hits[i] = 0;
 	}
@@ -16,7 +14,7 @@ Channel.prototype.setHit = function(tick){
 	this.hits[tick] = this.hits[tick] === 0 ? 1 : 0;
 }
 
-Channel.prototype.loadBuffer = function(url, index) {
+Channel.prototype.loadBuffer = function(url) {
 	var self =this,
 		request = new XMLHttpRequest();
 	

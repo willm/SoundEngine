@@ -5,11 +5,13 @@ $(function(){
 		channels = [],
 		tempo = $('#tempo').text();
 
-	soundEngine = new SoundEngine(tempo);
+	
 	
 	setUpPlayButton ();
 	
 	hookUpChannels();
+	
+	soundEngine = new SoundEngine(tempo, channels);
 	
 	function setUpPlayButton (){
 		var playbutton = $('#play_pause');
@@ -38,9 +40,13 @@ $(function(){
 	}
 	
 	function hookUpChannels (){
+		var samplePath;
+	
 		for (var i=0; i<channelElements.length; i++ ) {
 			tickElements = $(channelElements[i]).children('.tick');
+			samplePath = $(channelElements[i]).children('.sample_path').text();
 			channels[i] = new Channel(tickElements.length);
+			channels[i].loadBuffer(samplePath);
 			for (var j=0; j<tickElements.length; j++) {
 				$(tickElements[j]).click(function(channel, tick){
 					return function  (){
