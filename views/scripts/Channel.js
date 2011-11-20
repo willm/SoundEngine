@@ -3,6 +3,7 @@ function Channel (numberOfTicks, sample, number){
 	this.sample = sample;
 	this.number = number;
 	this.buffer;
+	this.context = AudioContext.getInstance();
 	
 	var bufferLoader = new BufferLoader();
 	
@@ -16,29 +17,25 @@ Channel.prototype.setHit = function(tick){
 }
 
 Channel.prototype.loadBuffer = function(url, index) {
-  var context = AudioContext.getInstance();
-  // Load buffer asynchronously
-  var request = new XMLHttpRequest();
-  request.open("GET", url, true);
-  request.responseType = "arraybuffer";
-
-  var channel = this;
-
-  request.onload = function() {
-    // Asynchronously decode the audio file data in request.response
-    channel.context.decodeAudioData(
-      request.response,
-      function(buffer) {
-        if (!buffer) {
-          alert('error decoding file data: ' + url);
-          return;
-        }
-        channel.buffer = buffer;
-        if (++channel.loadCount == channel.urlList.length)
-          channel.onload(channel.buffer);
-      }
-    );
-  }
+	var self =this,
+		request = new XMLHttpRequest();
+	
+	request.open("GET", url, true);
+	request.responseType = "arraybuffer";
+	request.onload = function() {
+	// Asynchronously decode the audio file data in request.response
+		self.context.decodeAudioData(
+			request.response,
+			function(buffer) {
+				if (!buffer) {
+					alert('error decoding file data: ' + url);
+					return;
+				}
+				self.buffer = buffer;
+				//self.onload(self.buffer); callback here.
+			}
+		);
+	}
 
   request.onerror = function() {
     alert('BufferLoader: XHR error');
@@ -47,20 +44,9 @@ Channel.prototype.loadBuffer = function(url, index) {
   request.send();
 }
 
-
-var AudioContext = (function(){
-    function AudioContext() {
-        //do stuff
-    }
-    var instance;
-    return {
-        getInstance: function(){
-            if (instance == null) {
-                instance = new webkitAudioContext();
-                // Hide the constructor so the returned objected can't be new'd...
-                instance.constructor = null;
-            }
-            return instance;
-        }
-   };
-})();
+Channel.prototype.playSound = function (time) {
+	  var source = this.context.createBufferSource();
+	  source.buffer = this.buffer;
+	  source.connect(AudioContext.getInstance().destination);
+	  source.noteOn(time);
+	}
