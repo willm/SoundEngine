@@ -26,6 +26,7 @@ button{
 
 .sample_path{
 	width:200px;
+	float:left;
 }
 
 #tempo{
