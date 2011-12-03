@@ -23,6 +23,7 @@
 	"dependencies": {
 		"express": "2.4.5",
 		"jade": "0.14.2",
-		"path": "0.4.9"
+		"path": "0.4.9",
+		"formidable" : "1.0.8"
 	}
 }
