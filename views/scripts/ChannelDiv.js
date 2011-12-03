@@ -5,7 +5,8 @@ function ChannelDiv (numberOfTicks, sample){
 	this.channel = new Channel(this.ticks);
 	
 	this.div.append(
-		$('<p>').attr('class','sample_path').text(sample)
+		$('<p>').attr('class','sample_path').text(sample), 
+		this.sampleList()
 	);
 	
 	for(var i=0; i<this.ticks; i++){
@@ -37,3 +38,18 @@ ChannelDiv.prototype.toggle = function (element){
 		else 
 			element.css('background-color', 'transparent');
 	}
+	
+ChannelDiv.prototype.sampleList = function (){
+	var list = $('<select>');
+	$.get('/samples',function  (result){
+			for(var i =0; i<result.length; i++){
+				list.append($('<option>').text(result[i]));
+			}
+			
+		});
+	list.change(function  (){
+		console.log($(this).children(':selected').text());
+	})
+	return list;
+	
+}

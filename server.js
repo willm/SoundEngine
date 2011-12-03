@@ -1,5 +1,6 @@
 var express = require('express'),
 	path = require('path'),
+	fs = require('fs'),
 	server;
 
 server = express.createServer();
@@ -15,6 +16,16 @@ server.get('/', function showHomePage(req, res) {
 	res.render('index.jade', {layout:false});
 });
 
+server.get('/samples', function  (req, res){
+	fs.readdir(path.join(__dirname,'views','samples'), function(err, files){
+		if(err){
+			console.log(err);
+		}
+		console.log(files);
+		res.send(files);
+	});
+	
+})
 
 server.listen(8080);
 
