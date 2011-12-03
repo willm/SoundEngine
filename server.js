@@ -16,6 +16,6 @@ server.get('/', function showHomePage(req, res) {
 });
 
 
-server.listen(31052);
+server.listen(8080);
 
-console.log('Running on 31052');
+console.log('Running on 8080');
