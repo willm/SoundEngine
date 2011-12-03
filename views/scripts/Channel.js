@@ -1,7 +1,5 @@
-function Channel (numberOfTicks, sample, number){
+function Channel (numberOfTicks){
 	this.hits = [];
-	this.sample = sample;
-	this.number = number;
 	this.buffer;
 	this.context = AudioContext.getInstance();
 	
