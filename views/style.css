@@ -24,6 +24,8 @@ button{
 	float:left;
 }
 
+select{float:left;}
+
 .sample_path{
 	width:200px;
 	float:left;
