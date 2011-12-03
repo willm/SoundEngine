@@ -24,8 +24,9 @@ server.get('/samples', function  (req, res){
 		console.log(files);
 		res.send(files);
 	});
-	
-})
+});
+
+
 
 server.listen(8080);
 
