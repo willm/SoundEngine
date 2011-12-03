@@ -1,17 +1,15 @@
 $(function(){
 	var soundEngine,
 		tickElements,
-		channelElements = $('.channel'),
+		channelElements = [new ChannelDiv(8,"samples/perc2.wav")],
 		channels = [],
 		tempo = $('#tempo').text();
-
 	
 	
 	setUpPlayButton ();
 	
 	hookUpChannels();
-	
-	soundEngine = new SoundEngine(tempo, channels);
+
 	
 	function setUpPlayButton (){
 		var playbutton = $('#play_pause');
@@ -40,26 +38,16 @@ $(function(){
 	}
 	
 	function hookUpChannels (){
-		var samplePath;
-	
 		for (var i=0; i<channelElements.length; i++ ) {
-			tickElements = $(channelElements[i]).children('.tick');
-			samplePath = $(channelElements[i]).children('.sample_path').text();
-			channels[i] = new Channel(tickElements.length);
-			channels[i].loadBuffer(samplePath);
-			for (var j=0; j<tickElements.length; j++) {
-				$(tickElements[j]).click(function(channel, tick){
-					return function  (){
-						channel.setHit(tick);
-						console.log('channel: '+channel+'tick: '+tick);
-						toggle($(this));
-					};
-				}(channels[i],j));
-			}
+			channelElements[i].hookUpChannel();
+			channels.push(channelElements[i].channel);
+			console.log(channels[i]);
 		}
+		soundEngine = new SoundEngine(tempo, channels);
 	}
 	
 	function startStop (){
+		console.log(soundEngine);
 		if (soundEngine.isPlaying){
 			console.log('Stop');
 			soundEngine.isPlaying = false;
