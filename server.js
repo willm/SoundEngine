@@ -16,6 +16,6 @@ server.get('/', function showHomePage(req, res) {
 });
 
 
-server.listen(46440);
+server.listen(31052);
 
-console.log('Running on 46440');
+console.log('Running on 31052');
