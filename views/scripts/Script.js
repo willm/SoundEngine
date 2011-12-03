@@ -4,6 +4,8 @@ $(function(){
 		channelElements = [new ChannelDiv(8,"samples/perc2.wav")],
 		channels = [],
 		tempo = $('#tempo').text();
+		
+	new ModalWindow();
 	
 	setUpAddTrackButton ();
 	

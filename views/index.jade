@@ -7,6 +7,7 @@ head
 	title Sound Engine
 	link(rel="stylesheet", href="style.css", type="text/css")
 	link(rel="stylesheet", href="lib/jquery-ui/css/ui-darkness/jquery-ui-1.8.16.custom.css", type="text/css")
+	link(rel="stylesheet", href="modal.css", type="text/css")
 
 body
 	button(id="play_pause")
@@ -16,13 +17,28 @@ body
 		option 1/8
 		option 1/16
 	button(id="add_track")
+	button(id="upload", name="modal", href="#dialog")
+	//a(href="#dialog", name="modal") test
 	hr(style="clear:left")
 	div(id="channels")
+	div(id="boxes")
+		div(id="mask")
+		div(id="dialog", class="window")
+			a(href="#", class="close") [x] close
+			br
+			b Please select a file to upload
+			form(action="/upload")
+				input(type="file", name="upload")
+				br
+				input(type="submit", value="Upload")
+				
+
 
 	script(type="text/javascript", language="javascript", src="scripts/lib/jquery-1.6.2.min.js")
 	script(type="text/javascript", language="javascript", src="lib/jquery-ui/jquery-ui-1.8.16.custom.min.js")
 	script(type="text/javascript", language="javascript", src="scripts/AudioContext.js")
-	script(type="text/javascript", language="javascript", src="scripts/Script.js")
 	script(type="text/javascript", language="javascript",src="scripts/SoundEngine.js")
 	script(type="text/javascript", language="javascript", src="scripts/Channel.js")
 	script(type="text/javascript", language="javascript", src="scripts/ChannelDiv.js")
+	script(type="text/javascript", language="javascript", src="scripts/ModalWindow.js")
+	script(type="text/javascript", language="javascript", src="scripts/Script.js")
