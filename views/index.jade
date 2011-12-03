@@ -27,7 +27,7 @@ body
 			a(href="#", class="close") [x] close
 			br
 			b Please select a file to upload
-			form(action="/upload")
+			form(action="/upload", method="post", enctype="multipart/form-data")
 				input(type="file", name="upload")
 				br
 				input(type="submit", value="Upload")

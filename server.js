@@ -1,6 +1,8 @@
 var express = require('express'),
 	path = require('path'),
 	fs = require('fs'),
+	formidable = require('formidable'),
+	sys=require('sys'),
 	server;
 
 server = express.createServer();
@@ -21,11 +23,20 @@ server.get('/samples', function  (req, res){
 		if(err){
 			console.log(err);
 		}
-		console.log(files);
 		res.send(files);
 	});
 });
 
+server.post('/upload',function  (req, res){
+	var form = new formidable.IncomingForm();
+	form.uploadDir = path.join(__dirname,'views','samples');
+	form.keepExtensions = true;
+	form.parse(req, function(err, fields, files) {
+		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
+	});
+
+	res.send();
+})
 
 
 server.listen(8080);
