@@ -41,6 +41,7 @@ ChannelDiv.prototype.toggle = function (element){
 	
 ChannelDiv.prototype.sampleList = function (){
 	var list = $('<select>');
+	var that = this;
 	$.get('/samples',function  (result){
 			for(var i =0; i<result.length; i++){
 				list.append($('<option>').text(result[i]));
@@ -48,7 +49,9 @@ ChannelDiv.prototype.sampleList = function (){
 			
 		});
 	list.change(function  (){
-		console.log($(this).children(':selected').text());
+		var selectedSample = $(this).children(':selected').text();
+		console.log(selectedSample);
+		that.channel.loadBuffer('samples/'+selectedSample);
 	})
 	return list;
 	
