@@ -65,7 +65,10 @@ $(function(){
 		
 		addtrackbutton.click(function  (){
 			var samplePath = prompt("Please enter the sample you would like to use for this channel")
-			console.log(samplePath);
+			var newChannel = new ChannelDiv(8, samplePath);
+			newChannel.hookUpChannel();
+			channelElements.push(newChannel);
+			channels.push(newChannel.channel);
 		});
 	}
 
