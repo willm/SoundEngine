@@ -5,12 +5,14 @@ $(function(){
 		channels = [],
 		tempo = $('#tempo').text();
 	
+	setUpAddTrackButton ();
 	
 	setUpPlayButton ();
 	
 	hookUpChannels();
 
-	
+//---------------------PLAY BUTTON
+
 	function setUpPlayButton (){
 		var playbutton = $('#play_pause');
 		
@@ -35,16 +37,7 @@ $(function(){
 				e.stopPropagation();
 			}
 		});
-	}
-	
-	function hookUpChannels (){
-		for (var i=0; i<channelElements.length; i++ ) {
-			channelElements[i].hookUpChannel();
-			channels.push(channelElements[i].channel);
-			console.log(channels[i]);
-		}
-		soundEngine = new SoundEngine(tempo, channels);
-	}
+	}	
 	
 	function startStop (){
 		console.log(soundEngine);
@@ -59,12 +52,32 @@ $(function(){
 			soundEngine.playSequence(channels);
 		}
 	}
+	
+//---------------------ADD TRACK BUTTON
 
-	function toggle (element){
-		var isOn = element.css('background-color') !== 'rgb(255, 0, 0)';
-		if(isOn)
-			element.css('background-color', 'red');
-		else 
-			element.css('background-color', 'transparent');
+	function setUpAddTrackButton (){
+		var addtrackbutton = $('#add_track');
+
+		addtrackbutton.button({
+			icons: {primary: "ui-icon-plusthick"},
+			text : false
+		});
+		
+		addtrackbutton.click(function  (){
+			var samplePath = prompt("Please enter the sample you would like to use for this channel")
+			console.log(samplePath);
+		});
 	}
+
+	
+	function hookUpChannels (){
+		for (var i=0; i<channelElements.length; i++ ) {
+			channelElements[i].hookUpChannel();
+			channels.push(channelElements[i].channel);
+			console.log(channels[i]);
+		}
+		soundEngine = new SoundEngine(tempo, channels);
+	}
+	
+
 });
