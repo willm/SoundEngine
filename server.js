@@ -27,12 +27,20 @@ server.get('/samples', function  (req, res){
 	});
 });
 
+server.get('/synth', function  (req, res){
+	res.render('synth.jade', {layout:false});
+});
+
 server.post('/upload',function  (req, res){
 	var form = new formidable.IncomingForm();
 	form.uploadDir = path.join(__dirname,'views','samples');
 	form.keepExtensions = true;
 	form.parse(req, function(err, fields, files) {
+		if(err){
+			res.send("error", 500);
+		}
 		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
+		res.send('file uploaded successfully');
 	});
 
 	res.send();
