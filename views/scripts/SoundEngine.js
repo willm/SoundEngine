@@ -29,7 +29,7 @@ function SoundEngine(bpm, channels){
 	}
 	
 	this.setStartTime = function  (){
-		var context = AudioContext.getInstance();
+		var context = MyAudioContext.getInstance();
 		this.startTime = context.currentTime+ 0.100;
 	}
 }

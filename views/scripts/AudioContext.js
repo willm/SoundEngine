@@ -1,5 +1,5 @@
-var AudioContext = (function(){
-    function AudioContext() {
+var MyAudioContext = (function(){
+    function MyAudioContext() {
         //do stuff
     }
     var instance;
