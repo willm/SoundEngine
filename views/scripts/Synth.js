@@ -31,7 +31,7 @@ $(function  (){
 
 	var SchedulerApp = function() {
 		this.audiolet = new Audiolet();
-
+		this.audiolet.scheduler.setTempo(190);
 		// Play one note on beat 0
 		this.note(0, 'G4');
 		this.note(1,'G3');
