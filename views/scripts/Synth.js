@@ -1,11 +1,3 @@
-$(function  (){
-	$('#play').click(function(){
-		console.log('playing');
-		playExample();
-	});
-		
-		
-	function playExample() {
 	var Synth = function(audiolet, frequency) {
 		AudioletGroup.call(this, audiolet, 0, 1);
 		// Basic wave
@@ -29,35 +21,14 @@ $(function  (){
 	}
 	extend(Synth, AudioletGroup);
 
-	var SchedulerApp = function() {
+	var SchedulerApp = function(tempo) {
 		this.audiolet = new Audiolet();
-		this.audiolet.scheduler.setTempo(190);
-		// Play one note on beat 0
-		this.note(0, 'G4');
-		this.note(1,'G3');
-		this.note(2,'C4');
-		
-		this.note(4, 'G4');
-		this.note(5,'G3');
-		this.note(6,'C4');
-		
-		this.note(8, 'G4');
-		this.note(8.5,'F4');
-		this.note(9,'E4');
-		this.note(9.5,'D4');
-		this.note(10,'C4');
-		this.note(10.5,'D4');
-		this.note(11,'E4');
-		this.note(11.5,'F4');
-		
-		this.note(12, 'G4');
-		this.note(13,'G3');
-		this.note(14,'C4');
+		this.audiolet.scheduler.setTempo(tempo);
 	}
 
 	SchedulerApp.prototype.note = function  (beat, note){
-		this.audiolet.scheduler.addAbsolute(beat, function() {
-		    this.playNote(Note.fromLatin(note).frequency());
+		this.audiolet.scheduler.addRelative(beat, function() {
+			this.playNote(Note.fromLatin(note).frequency());
 		}.bind(this));
 	}
 
@@ -65,9 +36,4 @@ $(function  (){
 		var synth = new Synth(this.audiolet, frequency);
 		synth.connect(this.audiolet.output);
 	}
-
-	var app = new SchedulerApp();
-
-	}
-})
 

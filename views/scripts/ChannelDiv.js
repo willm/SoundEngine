@@ -1,8 +1,7 @@
-function ChannelDiv (numberOfTicks, sample){
-	this.channel;
+function ChannelDiv (numberOfTicks, sample, channel){
+	this.channel = channel;
 	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
-	this.channel = new Channel(this.ticks);
 	
 	this.div.append(
 		$('<p>').attr('class','sample_path').text(sample), 
@@ -18,8 +17,8 @@ function ChannelDiv (numberOfTicks, sample){
 ChannelDiv.prototype.hookUpChannel = function  (){
 	var tickElements = this.div.children('.tick'),
 			samplePath = this.div.children('.sample_path').text();
-		
-		this.channel.loadBuffer(samplePath);
+		if(console.log(this.channel.getName()) === "Channel")
+			this.channel.loadBuffer(samplePath);
 		for (var i=0; i<this.ticks; i++) {
 			$(tickElements[i]).click(function(channelDiv, tick){
 				return function  (){

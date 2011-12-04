@@ -1,7 +1,10 @@
 $(function(){
 	var soundEngine,
 		tickElements,
-		channelElements = [new ChannelDiv(8,"samples/perc2.wav")],
+		channelElements = [
+			new ChannelDiv(8,"samples/perc2.wav", new Channel(8)),
+			new ChannelDiv(8,"samples/perc2.wav", new SynthChannel(8,160))
+			],
 		channels = [],
 		tempo = $('#tempo').text();
 		
@@ -66,8 +69,8 @@ $(function(){
 		});
 		
 		addtrackbutton.click(function  (){
-			var samplePath = prompt("Please enter the sample you would like to use for this channel")
-			var newChannel = new ChannelDiv(8, samplePath);
+			//var samplePath = prompt("Please enter the sample you would like to use for this channel")
+			var newChannel = new ChannelDiv(8, "samples/kick.wav",new Channel(8));
 			newChannel.hookUpChannel();
 			channelElements.push(newChannel);
 			channels.push(newChannel.channel);
@@ -86,3 +89,9 @@ $(function(){
 	
 
 });
+
+Object.prototype.getName = function() { 
+   var funcNameRegex = /function (.{1,})\(/;
+   var results = (funcNameRegex).exec((this).constructor.toString());
+   return (results && results.length > 1) ? results[1] : "";
+};

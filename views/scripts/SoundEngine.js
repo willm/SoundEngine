@@ -11,7 +11,14 @@ function SoundEngine(bpm, channels){
 		for (var i=0; i < channel.hits.length; i++) {
 			if(channel.hits[i]){
 				console.log((time)+i *this.eighthNoteTime);
-				channel.playSound((time)+i *this.eighthNoteTime);
+				console.log(channel.getName());
+				if(channel.getName() === "Channel"){
+					channel.playSound((time)+i *this.eighthNoteTime);
+					}
+				if(channel.getName() === "SynthChannel"){
+					console.log('synth' + i);
+					channel.playSound(i/4, 3);
+				}
 			}
 		}
 	}
