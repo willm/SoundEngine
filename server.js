@@ -37,10 +37,10 @@ server.post('/upload',function  (req, res){
 	form.keepExtensions = true;
 	form.parse(req, function(err, fields, files) {
 		if(err){
+			console.log(err);
 			res.send("error", 500);
 		}
 		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
-		res.send('file uploaded successfully');
 	});
 
 	res.send();
