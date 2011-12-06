@@ -1,11 +1,9 @@
-function ChannelDiv (numberOfTicks, sample){
+function ChannelDiv (numberOfTicks){
 	this.channel;
 	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
 	this.channel = new Channel(this.ticks);
-	
 	this.div.append(
-		$('<p>').attr('class','sample_path').text(sample), 
 		this.sampleList()
 	);
 	
@@ -15,9 +13,8 @@ function ChannelDiv (numberOfTicks, sample){
 	$('#channels').append(this.div);
 }
 
-ChannelDiv.prototype.hookUpChannel = function  (){
-	var tickElements = this.div.children('.tick'),
-			samplePath = this.div.children('.sample_path').text();
+ChannelDiv.prototype.hookUpChannel = function  (samplePath){
+	var tickElements = this.div.children('.tick');
 		
 		this.channel.loadBuffer(samplePath);
 		for (var i=0; i<this.ticks; i++) {
@@ -43,6 +40,7 @@ ChannelDiv.prototype.sampleList = function (){
 	var list = $('<select>');
 	var that = this;
 	$.get('/samples',function  (result){
+			that.hookUpChannel('samples/'+result[0]);
 			for(var i =0; i<result.length; i++){
 				list.append($('<option>').text(result[i]));
 			}

@@ -1,7 +1,7 @@
 $(function(){
 	var soundEngine,
 		tickElements,
-		channelElements = [new ChannelDiv(8,"samples/perc2.wav")],
+		channelElements = [new ChannelDiv(8)],
 		channels = [],
 		tempo = $('#tempo').text();
 		
@@ -66,9 +66,7 @@ $(function(){
 		});
 		
 		addtrackbutton.click(function  (){
-			var samplePath = prompt("Please enter the sample you would like to use for this channel")
-			var newChannel = new ChannelDiv(8, samplePath);
-			newChannel.hookUpChannel();
+			var newChannel = new ChannelDiv(8);
 			channelElements.push(newChannel);
 			channels.push(newChannel.channel);
 		});
@@ -77,7 +75,6 @@ $(function(){
 	
 	function hookUpChannels (){
 		for (var i=0; i<channelElements.length; i++ ) {
-			channelElements[i].hookUpChannel();
 			channels.push(channelElements[i].channel);
 			console.log(channels[i]);
 		}
