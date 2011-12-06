@@ -10,13 +10,12 @@ function ChannelDiv (numberOfTicks){
 	for(var i=0; i<this.ticks; i++){
 		this.div.append($('<div>').attr('class', 'tick'));
 	}
+	this.hookUpChannel();
 	$('#channels').append(this.div);
 }
 
-ChannelDiv.prototype.hookUpChannel = function  (samplePath){
+ChannelDiv.prototype.hookUpChannel = function  (){
 	var tickElements = this.div.children('.tick');
-		
-		this.channel.loadBuffer(samplePath);
 		for (var i=0; i<this.ticks; i++) {
 			$(tickElements[i]).click(function(channelDiv, tick){
 				return function  (){
@@ -40,7 +39,7 @@ ChannelDiv.prototype.sampleList = function (){
 	var list = $('<select>');
 	var that = this;
 	$.get('/samples',function  (result){
-			that.hookUpChannel('samples/'+result[0]);
+			that.channel.loadBuffer('samples/'+result[0]);
 			for(var i =0; i<result.length; i++){
 				list.append($('<option>').text(result[i]));
 			}
