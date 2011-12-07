@@ -36,7 +36,7 @@ ChannelDiv.prototype.toggle = function (element){
 	}
 	
 ChannelDiv.prototype.sampleList = function (){
-	var list = $('<select>');
+	var list = $('<select>').attr('class', 'sample_list');
 	var that = this;
 	$.get('/samples',function  (result){
 			that.channel.loadBuffer('samples/'+result[0]);
@@ -49,7 +49,7 @@ ChannelDiv.prototype.sampleList = function (){
 		var selectedSample = $(this).children(':selected').text();
 		console.log(selectedSample);
 		that.channel.loadBuffer('samples/'+selectedSample);
-	})
+	});
 	return list;
 	
 }

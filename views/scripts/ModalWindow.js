@@ -43,12 +43,34 @@ function ModalWindow() {
         //Cancel the link behavior
         e.preventDefault();
         $('#mask, .window').hide();
+        $('#upload_form').find('p').remove();
     });     
      
     //if mask is clicked
     $('#mask').click(function () {
         $(this).hide();
         $('.window').hide();
-    });         
+    });
+    
+    $('#upload_form').ajaxForm(function(data) {
+    			var samples = $('.sample_list').children();
+    			if(data === 'error'){
+    				$('#upload_form')
+    					.append($('<p>').text('there was an error uploading your file'));
+    			}
+                else{
+	                
+                	for(var i=0; i<samples.length; i++){
+		            	$(samples[i]).remove();
+		            	$('.window .close').trigger('click');
+		            }
+		            $.get('/samples',function  (result){
+							for(var i =0; i<result.length; i++){
+								console.log(result);
+								$('.sample_list').append($('<option>').text(result[i]));
+							}
+						});
+                }
+            });
      
 }
