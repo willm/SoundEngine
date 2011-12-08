@@ -11,14 +11,14 @@ head
 
 body
 	button(id="play_pause")
-	p(id="tempo") 160
+	button(id="add_track")
+	button(id="upload", name="modal", href="#dialog")
+	label(for="tempo", class="tempo") Tempo
+	input(class="tempo", class="tempo_value", value="160", type="text")
 	select(id="quantization")
 		option 1/4
 		option 1/8
 		option 1/16
-	button(id="add_track")
-	button(id="upload", name="modal", href="#dialog")
-	//a(href="#dialog", name="modal") test
 	hr(style="clear:left")
 	div(id="channels")
 	div(id="boxes")

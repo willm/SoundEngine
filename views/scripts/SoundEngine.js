@@ -7,6 +7,7 @@ function SoundEngine(bpm, channels){
 	this.barCount = 0;
 		
 	this.playBar = function (channel){
+		console.log('tempo: ' + this.tempo);
 		var time = this.startTime + this.barCount * 8 * this.eighthNoteTime;
 		for (var i=0; i < channel.hits.length; i++) {
 			if(channel.hits[i]){
@@ -33,3 +34,8 @@ function SoundEngine(bpm, channels){
 		this.startTime = context.currentTime+ 0.100;
 	}
 }
+
+SoundEngine.prototype.setTempo = function  (newTempo){
+		this.tempo = newTempo;
+		this.eighthNoteTime = (60 / this.tempo) / 2;
+	}

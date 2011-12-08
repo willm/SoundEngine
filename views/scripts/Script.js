@@ -3,8 +3,11 @@ $(function(){
 		tickElements,
 		channelElements = [new ChannelDiv(8)],
 		channels = [],
-		tempo = $('#tempo').text();
-		
+		tempo = $('.tempo_value').val();
+	
+		$('.tempo_value').change(function  (){
+			soundEngine.setTempo($(this).val());
+		});
 	new ModalWindow();
 	
 	setUpAddTrackButton ();
