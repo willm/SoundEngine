@@ -32,7 +32,8 @@ server.get('/synth', function  (req, res){
 });
 
 server.post('/upload',function  (req, res){
-	var form = new formidable.IncomingForm();
+	var form = new formidable.IncomingForm(),
+		filePath;
 	form.uploadDir = path.join(__dirname,'views','samples');
 	form.keepExtensions = true;
 	form.parse(req, function(err, fields, files) {
@@ -40,10 +41,11 @@ server.post('/upload',function  (req, res){
 			console.log(err);
 			res.send("error", 500);
 		}
+		filePath = files.upload.path;
 		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
 	});
 
-	res.send();
+	res.send('ok');
 })
 
 

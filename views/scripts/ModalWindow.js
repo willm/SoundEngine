@@ -52,25 +52,48 @@ function ModalWindow() {
         $('.window').hide();
     });
     
-    $('#upload_form').ajaxForm(function(data) {
-    			var samples = $('.sample_list').children();
-    			if(data === 'error'){
-    				$('#upload_form')
-    					.append($('<p>').text('there was an error uploading your file'));
-    			}
-                else{
-	                
-                	for(var i=0; i<samples.length; i++){
-		            	$(samples[i]).remove();
-		            	$('.window .close').trigger('click');
+    $('#upload_form').ajaxForm(
+		{
+			success:function(data,statusText,form) {
+					var samples = $('.sample_list').children();
+					if(data === 'error'){
+						if(!form.children('#upload_error').length)
+							form.append($('<p>').attr('id','upload_error').text('there was an error uploading your file'));
+					}
+		            else{
+			            
+		            	for(var i=0; i<samples.length; i++){
+				        	$(samples[i]).remove();
+				        	$('.window .close').trigger('click');
+				        }
+				        $.get('/samples',function  (result){
+								for(var i =0; i<result.length; i++){
+									console.log(result);
+									$('.sample_list').append($('<option>').text(result[i]));
+								}
+							});
 		            }
-		            $.get('/samples',function  (result){
-							for(var i =0; i<result.length; i++){
-								console.log(result);
-								$('.sample_list').append($('<option>').text(result[i]));
-							}
-						});
-                }
-            });
+		        },
+			beforeSubmit:function  (formData, form){
+				console.log(this);
+				if(formData[0].value.getExtension() !== "wav")
+					if(!form.children('#file_type_error').length)
+						form.append($('<p>').attr('id','file_type_error').text('only wav files are currently supported'));
+					return false;
+				return true;
+			}
+		});
+	$('#upload_form').submit(function  (evt){
+		return false;
+		evt.preventDefault();
+		if($($('#upload_form').children('input')[0]).val().getExtension() !== "wav"){
+			return false;
+			}
+		return true;
+	})
      
+}
+
+String.prototype.getExtension = function(){
+	return this.substring(this.lastIndexOf(".")+1).toLowerCase();
 }
