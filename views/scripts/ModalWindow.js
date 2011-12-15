@@ -75,11 +75,11 @@ function ModalWindow() {
 		            }
 		        },
 			beforeSubmit:function  (formData, form){
-				console.log(this);
 				if(formData[0].value.getExtension() !== "wav")
-					if(!form.children('#file_type_error').length)
+					if(!form.children('#file_type_error').length){
 						form.append($('<p>').attr('id','file_type_error').text('only wav files are currently supported'));
-					return false;
+						return false;
+						}
 				return true;
 			}
 		});
