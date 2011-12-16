@@ -2,7 +2,7 @@ var formidable = require('formidable'),
     http = require('http'),
 	path = require('path'),
 	fs = require('fs'),
-    sys = require('sys');
+    util = require('util');
 
 http.createServer(function(req, res) {
   if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
@@ -14,7 +14,7 @@ http.createServer(function(req, res) {
       fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
       res.writeHead(200, {'content-type': 'text/plain'});
       res.write('received upload:\n\n');
-      res.end(sys.inspect({fields: fields, files: files}));
+      res.end(util.inspect({fields: fields, files: files}));
     });
     return;
   }

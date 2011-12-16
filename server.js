@@ -2,7 +2,7 @@ var express = require('express'),
 	path = require('path'),
 	fs = require('fs'),
 	formidable = require('formidable'),
-	sys=require('sys'),
+	util=require('util'),
 	server;
 
 server = express.createServer();
