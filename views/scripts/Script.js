@@ -1,6 +1,5 @@
 $(function(){
 	var soundEngine,
-		tickElements,
 		channelElements = [new ChannelDiv(8)],
 		channels = [],
 		tempo = $('.tempo_value').val();
@@ -8,18 +7,12 @@ $(function(){
 		$('.tempo_value').change(function  (){
 			soundEngine.setTempo($(this).val());
 		});
+		
 	new ModalWindow();
 	
 	new AddTrackButton(channelElements, channels);
 	
 	hookUpChannels();
-	
-	
-	
-//---------------------ADD TRACK BUTTON
-
-
-
 	
 	function hookUpChannels (){
 		for (var i=0; i<channelElements.length; i++ ) {
@@ -29,6 +22,4 @@ $(function(){
 		soundEngine = new SoundEngine(tempo, channels);
 		new PlayButton(soundEngine);
 	}
-	
-
 });
