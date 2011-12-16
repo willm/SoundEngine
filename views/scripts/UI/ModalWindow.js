@@ -7,9 +7,8 @@ function ModalWindow() {
 		});
  
  
-    //select all the a tag with name equal to modal
+    //select all the tags with name equal to modal
     uploadbutton.click(function(e) {
-        //Cancel the link behavior
         e.preventDefault();
         //Get the A tag
         var id = $(this).attr('href');
@@ -75,10 +74,10 @@ function ModalWindow() {
 		            }
 		        },
 			beforeSubmit:function  (formData, form){
-				if(formData[0].value.getExtension() !== "wav")
-					if(!form.children('#file_type_error').length){
+				if(formData[0].value.getExtension() !== "wav"){
+					if(!form.children('#file_type_error').length > 0)
 						form.append($('<p>').attr('id','file_type_error').text('only wav files are currently supported'));
-						return false;
+					return false;
 						}
 				return true;
 			}
@@ -91,7 +90,6 @@ function ModalWindow() {
 			}
 		return true;
 	})
-     
 }
 
 String.prototype.getExtension = function(){
