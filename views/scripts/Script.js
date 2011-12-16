@@ -1,14 +1,9 @@
 $(function(){
 	var soundEngine,
 		channelElements = [new ChannelDiv(8)],
-		channels = [],
-		tempo = $('.tempo_value').val();
-	
-		$('.tempo_value').change(function  (){
-			soundEngine.setTempo($(this).val());
-		});
+		channels = [];
 		
-	new ModalWindow();
+	new UploadWindow();
 	
 	new AddTrackButton(channelElements, channels);
 	
@@ -19,7 +14,13 @@ $(function(){
 			channels.push(channelElements[i].channel);
 			console.log(channels[i]);
 		}
-		soundEngine = new SoundEngine(tempo, channels);
+		soundEngine = new SoundEngine(channels);
 		new PlayButton(soundEngine);
+		new TempoSelector(soundEngine);
 	}
+	
 });
+
+String.prototype.getExtension = function(){
+	return this.substring(this.lastIndexOf(".")+1).toLowerCase();
+}

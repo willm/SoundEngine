@@ -1,4 +1,4 @@
-function ModalWindow() {
+function UploadWindow() {
 	var uploadbutton = $('button[name=modal]');
 
     uploadbutton.button({
@@ -90,8 +90,4 @@ function ModalWindow() {
 			}
 		return true;
 	})
-}
-
-String.prototype.getExtension = function(){
-	return this.substring(this.lastIndexOf(".")+1).toLowerCase();
 }
