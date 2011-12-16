@@ -1,5 +1,5 @@
-function SoundEngine(bpm, channels){
-	this.tempo = bpm; // BPM (beats per minute)
+function SoundEngine(channels){
+	this.tempo = 160; // BPM (beats per minute)
 	this.channels = channels;
 	this.eighthNoteTime = (60 / this.tempo) / 2;
 	this.isPlaying = false;
@@ -30,7 +30,7 @@ function SoundEngine(bpm, channels){
 	}
 	
 	this.setStartTime = function  (){
-		var context = AudioContext.getInstance();
+		var context = SEAudioContext.getInstance();
 		this.startTime = context.currentTime+ 0.100;
 	}
 }
