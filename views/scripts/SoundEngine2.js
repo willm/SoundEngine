@@ -5,16 +5,9 @@ function SoundEngine(channels){
 	this.isPlaying = false;
 		
 	this.playSequence = function (){
-		var channel = this.channels[0],
-			pattern = new PSequence(channel.hits, Infinity);
-			
-		this.audiolet.scheduler.play([pattern],this.division,
-			function(pattern) {
-				if (pattern === 1) {
-				  channel.playSound();
-				}
-			}.bind(this)
-		);
+		for (var i=0; i<this.channels.length; i++) {
+			this.channels[i].play();
+		}
 	}
 	
 	this.setStartTime = function  (){

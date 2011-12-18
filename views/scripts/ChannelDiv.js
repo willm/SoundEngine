@@ -2,7 +2,7 @@ function ChannelDiv (numberOfTicks){
 	this.channel;
 	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
-	this.channel = new Channel(this.ticks);
+	this.channel = new AudioletChannel(this.ticks);
 	this.div.append(
 		this.sampleList()
 	);

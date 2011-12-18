@@ -1,5 +1,5 @@
 function AudioletChannel (numberOfTicks){
-	this.audiolet = SingleAudiolet.getInstance();;
+	this.audiolet = SingleAudiolet.getInstance();
 	this.hits = [];
 	this.buffer = new AudioletBuffer(1, 0);
 	for (var i = 0; i<numberOfTicks; i++) {
@@ -23,6 +23,17 @@ AudioletChannel.prototype.playSound = function (time) {
 	this.trigger.trigger.setValue(1);
 	}
 	
+AudioletChannel.prototype.play = function (){
+	var pattern = new PSequence(this.hits, Infinity);
+		
+	this.audiolet.scheduler.play([pattern],0.25,
+		function(pattern) {
+			if (pattern === 1) {
+			  this.playSound();
+			}
+		}.bind(this)
+	);
+}
 
 //	var SchedulerApp = function() {
 //		this.audiolet = SingleAudiolet.getInstance();
