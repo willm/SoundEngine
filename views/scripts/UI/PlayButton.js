@@ -32,12 +32,8 @@
 		if (this.soundEngine.isPlaying){
 			console.log('Stop');
 			this.soundEngine.stop();
-			this.soundEngine.isPlaying = false;
-			clearInterval(this.soundEngine.playing);
 		}
 		else {
-			this.soundEngine.isPlaying = true;
-			this.soundEngine.setStartTime();
-			this.soundEngine.playSequence(channels);
+			this.soundEngine.playSequence();
 		}
 	}
