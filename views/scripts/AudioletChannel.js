@@ -1,5 +1,5 @@
-function AudioletChannel (numberOfTicks, audiolet){
-	this.audiolet = audiolet;
+function AudioletChannel (numberOfTicks){
+	this.audiolet = SingleAudiolet.getInstance();;
 	this.hits = [];
 	this.buffer = new AudioletBuffer(1, 0);
 	for (var i = 0; i<numberOfTicks; i++) {
@@ -23,21 +23,17 @@ AudioletChannel.prototype.playSound = function (time) {
 	this.trigger.trigger.setValue(1);
 	}
 	
-/*	
-	var SchedulerApp = function() {
-		this.audiolet = new Audiolet();
-		var synth = new AudioletChannel(8,this.audiolet);
-		// Play one note on beat 0
-		var duration = new PSequence([0.5], Infinity);
-		var pattern = new PSequence([1,0.5,0.75,1,1,0,1,1,1,1], Infinity)
-		this.audiolet.scheduler.play([pattern],duration,function(pattern) {
-        // apply amplitude
-        console.log(pattern);
-        if(ser === 1)
-        	synth.playSound();
-      }.bind(this)
-    );
-			}
 
-	new SchedulerApp();
-*/
+//	var SchedulerApp = function() {
+//		this.audiolet = SingleAudiolet.getInstance();
+//		var channel = new AudioletChannel(8);
+//		var pattern = new PSequence([1,1,1,1], Infinity);
+//		this.audiolet.scheduler.play([pattern],0.25,function(pattern) {
+//		console.log(pattern);
+//		if(pattern === 1)
+//			channel.playSound();
+//	  }.bind(this)
+//);
+//			}
+
+//	SchedulerApp();
