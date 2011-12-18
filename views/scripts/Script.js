@@ -1,6 +1,6 @@
 $(function(){
 	var soundEngine,
-		channelElements = [];//[new ChannelDiv(8)],
+		channelElements = [],
 		channels = [];
 		
 	new UploadWindow();

@@ -3,12 +3,13 @@ function AudioletChannel (numberOfTicks){
 	this.hits = [];
 	this.playEvent;
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = 0;
+		this.hits[i] = {isOn : 0};
 	}
+	this.hits[0].first = true;
 }
 
 AudioletChannel.prototype.setHit = function(tick){
-	this.hits[tick] = this.hits[tick] === 0 ? 1 : 0;
+	this.hits[tick].isOn = this.hits[tick].isOn === 0 ? 1 : 0;
 }
 
 AudioletChannel.prototype.loadBuffer = function(url) {
@@ -29,7 +30,7 @@ AudioletChannel.prototype.play = function (){
 		
 	this.playEvent = this.audiolet.scheduler.play([pattern],0.25,
 		function(pattern) {
-			if (pattern === 1) {
+			if (pattern.isOn === 1) {
 			  this.playSound();
 			}
 		}.bind(this)
@@ -40,17 +41,3 @@ AudioletChannel.prototype.play = function (){
 AudioletChannel.prototype.stop = function  (){
 	this.audiolet.scheduler.stop(this.playEvent);
 }
-
-//	var SchedulerApp = function() {
-//		this.audiolet = SingleAudiolet.getInstance();
-//		var channel = new AudioletChannel(8);
-//		var pattern = new PSequence([1,1,1,1], Infinity);
-//		this.audiolet.scheduler.play([pattern],0.25,function(pattern) {
-//		console.log(pattern);
-//		if(pattern === 1)
-//			channel.playSound();
-//	  }.bind(this)
-//);
-//			}
-
-//	SchedulerApp();

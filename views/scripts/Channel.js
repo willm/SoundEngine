@@ -4,12 +4,13 @@ function Channel (numberOfTicks){
 	this.context = SEAudioContext.getInstance();
 	
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = 0;
+		this.hits[i] = {isOn : 0};
 	}
+	hits[0].first = true;
 }
 
 Channel.prototype.setHit = function(tick){
-	this.hits[tick] = this.hits[tick] === 0 ? 1 : 0;
+	this.hits[tick].isOn = this.hits[tick].isOn === 0 ? 1 : 0;
 }
 
 Channel.prototype.loadBuffer = function(url) {
