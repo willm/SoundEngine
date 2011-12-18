@@ -3,13 +3,13 @@ function SoundEngine(channels){
 	this.division = 0.5;
 	this.audiolet = SingleAudiolet.getInstance();
 	this.isPlaying = false;
-		
-	this.playSequence = function (){
-		for (var i=0; i<this.channels.length; i++) {
-			this.channels[i].play();
-		}
-		this.isPlaying = true;
+}
+
+SoundEngine.prototype.playSequence = function (){
+	for (var i=0; i<this.channels.length; i++) {
+		this.channels[i].play();
 	}
+	this.isPlaying = true;
 }
 
 SoundEngine.prototype.setTempo = function  (newTempo){
