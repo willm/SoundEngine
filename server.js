@@ -42,7 +42,7 @@ server.post('/upload',function  (req, res){
 			res.send("error", 500);
 		}
 		filePath = files.upload.path;
-		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name));
+		fs.rename(files.upload.path, path.join(form.uploadDir,files.upload.name.toLowerCase()));
 	});
 
 	res.send('ok');
