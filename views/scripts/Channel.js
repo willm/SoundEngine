@@ -1,15 +1,16 @@
 function Channel (numberOfTicks){
 	this.hits = [];
 	this.buffer;
-	this.context = MyAudioContext.getInstance();
+	this.context = SEAudioContext.getInstance();
 	
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = 0;
+		this.hits[i] = {isOn : 0};
 	}
+	hits[0].first = true;
 }
 
 Channel.prototype.setHit = function(tick){
-	this.hits[tick] = this.hits[tick] === 0 ? 1 : 0;
+	this.hits[tick].isOn = this.hits[tick].isOn === 0 ? 1 : 0;
 }
 
 Channel.prototype.loadBuffer = function(url) {
@@ -43,6 +44,6 @@ Channel.prototype.loadBuffer = function(url) {
 Channel.prototype.playSound = function (time) {
 	  var source = this.context.createBufferSource();
 	  source.buffer = this.buffer;
-	  source.connect(MyAudioContext.getInstance().destination);
+	  source.connect(SEAudioContext.getInstance().destination);
 	  source.noteOn(time);
 	}

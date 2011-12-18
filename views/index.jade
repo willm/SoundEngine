@@ -11,14 +11,14 @@ head
 
 body
 	button(id="play_pause")
-	p(id="tempo") 160
+	button(id="add_track")
+	button(id="upload", name="modal", href="#dialog")
+	label(for="tempo", class="tempo") Tempo
+	input(class="tempo", class="tempo_value", value="160", type="text")
 	select(id="quantization")
 		option 1/4
 		option 1/8
 		option 1/16
-	button(id="add_track")
-	button(id="upload", name="modal", href="#dialog")
-	//a(href="#dialog", name="modal") test
 	hr(style="clear:left")
 	div(id="channels")
 	div(id="boxes")
@@ -27,7 +27,7 @@ body
 			a(href="#", class="close") [x] close
 			br
 			b Please select a file to upload
-			form(action="/upload", method="post", enctype="multipart/form-data")
+			form(id="upload_form", action="/upload", method="post", enctype="multipart/form-data")
 				input(type="file", name="upload")
 				br
 				input(type="submit", value="Upload")
@@ -39,11 +39,23 @@ body
 	script(type="text/javascript", language="javascript", src="scripts/lib/music.js")
 	
 	script(type="text/javascript", language="javascript", src="lib/jquery-ui/jquery-ui-1.8.16.custom.min.js")
+	script(type="text/javascript", language="javascript", src="scripts/lib/jquery.form.js")
+	script(type="text/javascript", language="javascript", src="scripts/lib/Audiolet.min.js")
+	script(type="text/javascript", language="javascript", src="scripts/lib/audiofile.js")
 	script(type="text/javascript", language="javascript", src="scripts/AudioContext.js")
-	script(type="text/javascript", language="javascript",src="scripts/SoundEngine.js")
+	script(type="text/javascript", language="javascript", src="scripts/AudioletChannel.js")
+
+	script(type="text/javascript", language="javascript",src="scripts/SoundEngine2.js")
 	script(type="text/javascript", language="javascript", src="scripts/Channel.js")
+	
 	script(type="text/javascript", language="javascript", src="scripts/ChannelDiv.js")
-	script(type="text/javascript", language="javascript", src="scripts/ModalWindow.js")
+	script(type="text/javascript", language="javascript", src="scripts/BeatLightDiv.js")
+	script(type="text/javascript", language="javascript", src="scripts/UI/UploadWindow.js")
+	script(type="text/javascript", language="javascript", src="scripts/UI/PlayButton.js")
+	script(type="text/javascript", language="javascript", src="scripts/UI/AddTrackButton.js")
+	script(type="text/javascript", language="javascript", src="scripts/UI/TempoSelector.js")
+	script(type="text/javascript", language="javascript", src="scripts/MetronomeChannel.js")
+	script(type="text/javascript", language="javascript", src="scripts/AudioletChannel.js")
 	script(type="text/javascript", language="javascript", src="scripts/Script.js")
 	script(type="text/javascript", language="javascript", src="scripts/Synth.js")
 	script(type="text/javascript", language="javascript", src="scripts/SynthChannel.js")

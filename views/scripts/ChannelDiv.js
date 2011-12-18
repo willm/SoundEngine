@@ -1,24 +1,21 @@
-function ChannelDiv (numberOfTicks, sample, channel){
-	this.channel = channel;
+function ChannelDiv (numberOfTicks){
+	this.channel;
 	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
-	
+	this.channel = new AudioletChannel(this.ticks);
 	this.div.append(
-		$('<p>').attr('class','sample_path').text(sample), 
 		this.sampleList()
 	);
 	
 	for(var i=0; i<this.ticks; i++){
 		this.div.append($('<div>').attr('class', 'tick'));
 	}
+	this.hookUpChannel();
 	$('#channels').append(this.div);
 }
 
 ChannelDiv.prototype.hookUpChannel = function  (){
-	var tickElements = this.div.children('.tick'),
-			samplePath = this.div.children('.sample_path').text();
-		if(console.log(this.channel.getName()) === "Channel")
-			this.channel.loadBuffer(samplePath);
+	var tickElements = this.div.children('.tick');
 		for (var i=0; i<this.ticks; i++) {
 			$(tickElements[i]).click(function(channelDiv, tick){
 				return function  (){
@@ -39,9 +36,10 @@ ChannelDiv.prototype.toggle = function (element){
 	}
 	
 ChannelDiv.prototype.sampleList = function (){
-	var list = $('<select>');
+	var list = $('<select>').attr('class', 'sample_list');
 	var that = this;
 	$.get('/samples',function  (result){
+			that.channel.loadBuffer('samples/'+result[0]);
 			for(var i =0; i<result.length; i++){
 				list.append($('<option>').text(result[i]));
 			}
@@ -51,7 +49,7 @@ ChannelDiv.prototype.sampleList = function (){
 		var selectedSample = $(this).children(':selected').text();
 		console.log(selectedSample);
 		that.channel.loadBuffer('samples/'+selectedSample);
-	})
+	});
 	return list;
 	
 }

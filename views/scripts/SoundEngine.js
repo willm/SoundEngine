@@ -1,5 +1,5 @@
-function SoundEngine(bpm, channels){
-	this.tempo = bpm; // BPM (beats per minute)
+function SoundEngine(channels){
+	this.tempo = 160; // BPM (beats per minute)
 	this.channels = channels;
 	this.eighthNoteTime = (60 / this.tempo) / 2;
 	this.isPlaying = false;
@@ -7,6 +7,7 @@ function SoundEngine(bpm, channels){
 	this.barCount = 0;
 		
 	this.playBar = function (channel){
+		console.log('tempo: ' + this.tempo);
 		var time = this.startTime + this.barCount * 8 * this.eighthNoteTime;
 		for (var i=0; i < channel.hits.length; i++) {
 			if(channel.hits[i]){
@@ -36,7 +37,12 @@ function SoundEngine(bpm, channels){
 	}
 	
 	this.setStartTime = function  (){
-		var context = MyAudioContext.getInstance();
+		var context = SEAudioContext.getInstance();
 		this.startTime = context.currentTime+ 0.100;
 	}
 }
+
+SoundEngine.prototype.setTempo = function  (newTempo){
+		this.tempo = newTempo;
+		this.eighthNoteTime = (60 / this.tempo) / 2;
+	}
