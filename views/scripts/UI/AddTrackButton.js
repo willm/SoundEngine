@@ -1,4 +1,4 @@
-	function AddTrackButton (channelElements, channels){
+	function AddTrackButton (channelElements, channels, numberOfHits){
 		var addtrackbutton = $('#add_track');
 
 		addtrackbutton.button({
@@ -7,7 +7,7 @@
 		});
 		
 		addtrackbutton.click(function  (){
-			var newChannel = new ChannelDiv(8);
+			var newChannel = new ChannelDiv(numberOfHits);
 			channelElements.push(newChannel);
 			channels.push(newChannel.channel);
 		});

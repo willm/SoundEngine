@@ -1,11 +1,11 @@
 $(function(){
 	var soundEngine,
-		channelElements = [],
+		channelElements = [new BeatLightDiv(16)],
 		channels = [];
 		
 	new UploadWindow();
 	
-	new AddTrackButton(channelElements, channels);
+	new AddTrackButton(channelElements, channels, 16);
 	
 	for (var i=0; i<channelElements.length; i++ ) {
 		channels.push(channelElements[i].channel);
