@@ -1,7 +1,6 @@
 function AudioletChannel (numberOfTicks){
 	this.audiolet = SingleAudiolet.getInstance();
 	this.hits = [];
-	this.buffer = new AudioletBuffer(1, 0);
 	for (var i = 0; i<numberOfTicks; i++) {
 		this.hits[i] = 0;
 	}
@@ -12,6 +11,7 @@ AudioletChannel.prototype.setHit = function(tick){
 }
 
 AudioletChannel.prototype.loadBuffer = function(url) {
+	this.buffer = new AudioletBuffer(1, 0);
 	this.buffer.load(url, false);
 	this.player = new BufferPlayer(this.audiolet, this.buffer, 1, 0, 0);
 	this.trigger = new TriggerControl(this.audiolet,1);
