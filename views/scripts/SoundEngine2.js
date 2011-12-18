@@ -18,3 +18,9 @@ function SoundEngine(channels){
 SoundEngine.prototype.setTempo = function  (newTempo){
 		this.tempo = newTempo;
 	}
+	
+SoundEngine.prototype.stop = function  (){
+	for (var i=0; i<this.channels.length; i++) {
+			this.channels[i].stop();
+		}
+}

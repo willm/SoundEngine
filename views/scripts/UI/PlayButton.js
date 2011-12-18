@@ -31,6 +31,7 @@
 		console.log(this.soundEngine);
 		if (this.soundEngine.isPlaying){
 			console.log('Stop');
+			this.soundEngine.stop();
 			this.soundEngine.isPlaying = false;
 			clearInterval(this.soundEngine.playing);
 		}
