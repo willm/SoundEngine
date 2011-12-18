@@ -8,19 +8,17 @@ function SoundEngine(channels){
 		for (var i=0; i<this.channels.length; i++) {
 			this.channels[i].play();
 		}
-	}
-	
-	this.setStartTime = function  (){
-		this.audiolet.scheduler.stop();
+		this.isPlaying = true;
 	}
 }
 
 SoundEngine.prototype.setTempo = function  (newTempo){
-		this.tempo = newTempo;
+		this.audiolet.scheduler.setTempo(newTempo);
 	}
 	
 SoundEngine.prototype.stop = function  (){
 	for (var i=0; i<this.channels.length; i++) {
 			this.channels[i].stop();
 		}
+	this.isPlaying = false;
 }
