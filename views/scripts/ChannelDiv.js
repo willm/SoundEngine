@@ -3,9 +3,12 @@ function ChannelDiv (numberOfTicks){
 	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
 	this.channel = new AudioletChannel(this.ticks);
-	this.div.append(
-		this.sampleList()
-	);
+	var controls = $('<div class="controls">')
+		.css('float', 'left');
+	controls.append(this.sampleList());
+	controls.append($('<br><br>'));
+	controls.append(new VolumeSlider(this.channel));
+	this.div.append(controls);
 	
 	for(var i=0; i<this.ticks; i++){
 		this.div.append($('<div>').attr('class', 'tick'));
@@ -26,7 +29,7 @@ ChannelDiv.prototype.hookUpChannel = function  (){
 			}(this,i));
 		}
 	}
-			
+
 ChannelDiv.prototype.toggle = function (element){
 		var isOn = element.css('background-color') !== 'rgb(255, 0, 0)';
 		if(isOn)
@@ -51,5 +54,4 @@ ChannelDiv.prototype.sampleList = function (){
 		that.channel.loadBuffer('samples/'+selectedSample);
 	});
 	return list;
-	
 }
