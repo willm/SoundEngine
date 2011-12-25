@@ -5,7 +5,7 @@ function ChannelDiv (numberOfTicks){
 	this.channel = new AudioletChannel(this.ticks);
 	var controls = $('<div class="controls">')
 		.css('float', 'left');
-	controls.append(this.sampleList());
+	controls.append(new SampleList(this.channel));
 	controls.append($('<br><br>'));
 	controls.append(new VolumeSlider(this.channel));
 	this.div.append(controls);
@@ -37,21 +37,3 @@ ChannelDiv.prototype.toggle = function (element){
 		else 
 			element.css('background-color', 'transparent');
 	}
-	
-ChannelDiv.prototype.sampleList = function (){
-	var list = $('<select>').attr('class', 'sample_list');
-	var that = this;
-	$.get('/samples',function  (result){
-			that.channel.loadBuffer('samples/'+result[0]);
-			for(var i =0; i<result.length; i++){
-				list.append($('<option>').text(result[i]));
-			}
-			
-		});
-	list.change(function  (){
-		var selectedSample = $(this).children(':selected').text();
-		console.log(selectedSample);
-		that.channel.loadBuffer('samples/'+selectedSample);
-	});
-	return list;
-}

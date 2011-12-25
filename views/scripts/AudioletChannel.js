@@ -21,7 +21,6 @@ AudioletChannel.prototype.loadBuffer = function(url) {
 	this.gain = new Gain(this.audiolet, 1.0);
 	this.player.connect(this.gain);
 	this.gain.connect(this.audiolet.output);
-	//trigger -> player -> gain -> audiolet
 }
 
 AudioletChannel.prototype.setVolume = function  (volume){

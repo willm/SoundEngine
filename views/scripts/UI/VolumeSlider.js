@@ -10,6 +10,5 @@ function VolumeSlider (channel){
 			that.channel.setVolume($(this).val());
 		});
 
-
 	return slider;
 }

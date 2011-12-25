@@ -14,6 +14,7 @@ $(function(){
 	soundEngine = new SoundEngine(channels);
 	new PlayButton(soundEngine);
 	new TempoSelector(soundEngine);
+	new SavePatternButton(channels);
 });
 
 String.prototype.getExtension = function(){

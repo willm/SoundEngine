@@ -31,6 +31,12 @@ select{float:left;}
 	float:left;
 }
 
+#channels{
+	float:left;
+	white-space:nowrap;
+	display:block;
+}
+
 .sample_list{
 	min-width:200px;
 }
@@ -44,4 +50,19 @@ select{float:left;}
 }
 .tempo_value{
 	float:left;
+}
+
+#patterns{
+	width:250px;
+	border:solid 1px;
+	float:right;
+	display:inline;
+	color:green;
+}
+
+.pattern{
+	margin:8px;
+	height:30px;
+	border:solid 1px;
+	background-color:green;
 }
