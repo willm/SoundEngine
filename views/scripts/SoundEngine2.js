@@ -1,15 +1,28 @@
 function SoundEngine(channels){
 	this.channels = channels;
-	this.division = 0.5;
 	this.audiolet = SingleAudiolet.getInstance();
 	this.isPlaying = false;
 }
 
 SoundEngine.prototype.playSequence = function (){
-	for (var i=0; i<this.channels.length; i++) {
+	var numberOfChannels = this.channels.length;
+	for (var i=0; i<numberOfChannels; i++) {
 		this.channels[i].play();
 	}
 	this.isPlaying = true;
+	var pat = new PSequence([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], Infinity);
+	this.playEvent = this.audiolet.scheduler.play([pat],0.25,
+		function(pat) {
+			if (pat === 1) {
+				if(numberOfChannels < this.channels.length){
+					for (var i=numberOfChannels; i<this.channels.length; i++) {
+						this.channels[i].play();
+					}
+					numberOfChannels = this.channels.length;
+				}
+			}
+		}.bind(this)
+	);
 }
 
 SoundEngine.prototype.setTempo = function  (newTempo){
