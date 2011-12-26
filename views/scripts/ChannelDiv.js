@@ -13,6 +13,8 @@ function ChannelDiv (numberOfTicks){
 	for(var i=0; i<this.ticks; i++){
 		this.div.append($('<div>').attr('class', 'tick'));
 	}
+	this.div.append($('<br>'));
+	this.div.append(new PitchDiv(this.channel));
 	this.hookUpChannel();
 	$('#channels').append(this.div);
 }
@@ -25,6 +27,8 @@ ChannelDiv.prototype.hookUpChannel = function  (){
 					channelDiv.channel.setHit(tick);
 					console.log('channel: '+channelDiv.channel+'tick: '+tick);
 					channelDiv.toggle($(this));
+					$('.channel').css('border', 'none');
+					channelDiv.div.css('border', '1px dashed');
 				};
 			}(this,i));
 		}

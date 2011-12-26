@@ -1,5 +1,6 @@
 function VolumeSlider (channel){
 	this.channel = channel;
+	this.div = $('<div>').text('Vol: ');
 	var that = this;
 	var slider = $('<input>')
 		.attr('type', 'range')
@@ -9,6 +10,7 @@ function VolumeSlider (channel){
 		.change(function  (){
 			that.channel.setVolume($(this).val());
 		});
+	this.div.append(slider);
 
-	return slider;
+	return this.div;
 }

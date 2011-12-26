@@ -3,7 +3,10 @@ function AudioletChannel (numberOfTicks){
 	this.hits = [];
 	this.playEvent;
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = {isOn : 0};
+		this.hits[i] = {
+			isOn : 0,
+			pitch : 1
+			};
 	}
 	this.hits[0].first = true;
 }
@@ -31,13 +34,19 @@ AudioletChannel.prototype.playSound = function (time) {
 	this.trigger.trigger.setValue(1);
 	}
 	
+AudioletChannel.prototype.setPitch =function  (pitch){
+	this.player.playbackRate.setValue(pitch);
+}
+	
 AudioletChannel.prototype.play = function (){
 	var pattern = new PSequence(this.hits, Infinity);
 		
 	this.playEvent = this.audiolet.scheduler.play([pattern],0.25,
 		function(pattern) {
 			if (pattern.isOn === 1) {
-			  this.playSound();
+				console.log(pattern.pitch);
+				this.setPitch(pattern.pitch);
+				this.playSound();
 			}
 		}.bind(this)
 	);

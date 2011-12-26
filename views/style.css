@@ -10,6 +10,7 @@
 }
 
 .row{
+	//height:70px;
 	clear:left;
 }
 
@@ -65,4 +66,11 @@ select{float:left;}
 	height:30px;
 	border:solid 1px;
 	background-color:green;
+}
+
+table td{
+	border:1px solid;
+	width:55px;
+	height:20px;
+	clear:left;
 }
