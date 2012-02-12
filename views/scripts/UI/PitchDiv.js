@@ -1,6 +1,5 @@
 function PitchDiv (channel){
 	this.channel = channel;
-	this.pitches = [1,1.5,1.6,1.7,1.8,1.9,2,2.1,2.2];
 	var table = $('<table>');
 	for(var i = 0; i<12; i++){
 		table.append(this.noteRow(this.pitch));
