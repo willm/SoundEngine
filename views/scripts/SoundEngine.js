@@ -1,48 +1,37 @@
 function SoundEngine(channels){
-	this.tempo = 160; // BPM (beats per minute)
 	this.channels = channels;
-	this.eighthNoteTime = (60 / this.tempo) / 2;
+	this.audiolet = SingleAudiolet.getInstance();
 	this.isPlaying = false;
-	this.list;
-	this.barCount = 0;
-		
-	this.playBar = function (channel){
-		console.log('tempo: ' + this.tempo);
-		var time = this.startTime + this.barCount * 8 * this.eighthNoteTime;
-		for (var i=0; i < channel.hits.length; i++) {
-			if(channel.hits[i]){
-				console.log((time)+i *this.eighthNoteTime);
-				console.log(channel.getName());
-				if(channel.getName() === "Channel"){
-					channel.playSound((time)+i *this.eighthNoteTime);
+}
+
+SoundEngine.prototype.playSequence = function (){
+	var numberOfChannels = this.channels.length;
+	for (var i=0; i<numberOfChannels; i++) {
+		this.channels[i].play();
+	}
+	this.isPlaying = true;
+	var pat = new PSequence([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], Infinity);
+	this.playEvent = this.audiolet.scheduler.play([pat],0.25,
+		function(pat) {
+			if (pat === 1) {
+				if(numberOfChannels < this.channels.length){
+					for (var i=numberOfChannels; i<this.channels.length; i++) {
+						this.channels[i].play();
 					}
-				if(channel.getName() === "SynthChannel"){
-					console.log('synth' + i);
-					channel.playSound(i/4, 3);
+					numberOfChannels = this.channels.length;
 				}
 			}
-		}
-	}
-	
-	this.playSequence = function (){
-		return function(that){
-				that.playing=setInterval(function(){
-					for (var i=0; i<that.channels.length; i++) {
-						that.playBar(channels[i]);
-					}
-					
-					that.barCount++;
-			},(8000 * that.eighthNoteTime));
-		}(this);
-	}
-	
-	this.setStartTime = function  (){
-		var context = SEAudioContext.getInstance();
-		this.startTime = context.currentTime+ 0.100;
-	}
+		}.bind(this)
+	);
 }
 
 SoundEngine.prototype.setTempo = function  (newTempo){
-		this.tempo = newTempo;
-		this.eighthNoteTime = (60 / this.tempo) / 2;
+		this.audiolet.scheduler.setTempo(newTempo);
 	}
+	
+SoundEngine.prototype.stop = function  (){
+	for (var i=0; i<this.channels.length; i++) {
+			this.channels[i].stop();
+		}
+	this.isPlaying = false;
+}
