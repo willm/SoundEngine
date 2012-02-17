@@ -20,7 +20,7 @@ Channel.prototype.loadBuffer = function(url) {
 	request.open("GET", url, true);
 	request.responseType = "arraybuffer";
 	request.onload = function() {
-	// Asynchronously decode the audio file data in request.response
+	//Asynchronously decode the audio file data in request.response
 		self.context.decodeAudioData(
 			request.response,
 			function(buffer) {
