@@ -24,6 +24,7 @@
 		"express": "2.5.1",
 		"jade": "0.14.2",
 		"path": "0.4.9",
-		"formidable" : "1.0.8"
+		"formidable" : "1.0.8",
+		"mongoose" : "2.5.6"
 	}
 }
