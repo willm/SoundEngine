@@ -1,4 +1,4 @@
-function AudioletChannel (numberOfTicks){
+var AudioletChannel = function (numberOfTicks){
 	this.audiolet = SingleAudiolet.getInstance();
 	this.hits = [];
 	this.playEvent;
@@ -45,7 +45,6 @@ AudioletChannel.prototype.play = function (){
 			}
 		}.bind(this)
 	);
-	console.log(this.playEvent);
 }
 
 AudioletChannel.prototype.stop = function  (){
