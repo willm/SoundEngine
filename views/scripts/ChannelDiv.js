@@ -1,12 +1,10 @@
 var ChannelDiv = function  (numberOfTicks){
-	this.channel;
-	this.ticks = numberOfTicks;
 	this.div = $('<div>').attr('class', 'row channel');
-	this.channel = new AudioletChannel(this.ticks);
+	this.channel = new AudioletChannel(numberOfTicks);
 	
 	this.div.append(this.getControls());
 	
-	for(var i=0; i<this.ticks; i++){
+	for(var i=0; i<numberOfTicks; i++){
 		this.div.append(this.channel.hits[i].div);
 	}
 	this.div.append($('<br>'));
