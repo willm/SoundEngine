@@ -3,16 +3,12 @@ function AudioletChannel (numberOfTicks){
 	this.hits = [];
 	this.playEvent;
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = {
-			isOn : 0,
-			pitch : 1
-			};
+		this.hits[i] = new Hit();
 	}
-	this.hits[0].first = true;
 }
 
 AudioletChannel.prototype.setHit = function(tick){
-	this.hits[tick].isOn = this.hits[tick].isOn === 0 ? 1 : 0;
+	this.hits[tick].set();
 }
 
 AudioletChannel.prototype.loadBuffer = function(url) {
@@ -43,8 +39,7 @@ AudioletChannel.prototype.play = function (){
 		
 	this.playEvent = this.audiolet.scheduler.play([pattern],0.25,
 		function(pattern) {
-			if (pattern.isOn === 1) {
-				console.log(pattern.pitch);
+			if (pattern.isOn) {
 				this.setPitch(pattern.pitch);
 				this.playSound();
 			}

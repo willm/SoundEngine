@@ -4,7 +4,6 @@ function PitchDiv (channel){
 	for(var i = 0; i<12; i++){
 		table.append(this.noteRow(this.pitch));
 		this.pitch = this.pitch + 0.1 * i+1;
-		console.log("pitch=" +this.pitch);
 	}
 	return table;
 }
@@ -17,14 +16,14 @@ PitchDiv.prototype.noteRow = function  (pitch){
 	return row;
 }
 
-PitchDiv.prototype.note = function  (hit){
+PitchDiv.prototype.note = function  (tick){
 	var that = this;
-	return $('<td class="row' + hit + '">')
+	return $('<td class="row' + tick + '">')
 			.toggle(function  (){
-				$('td.row' + hit).css('background-color', 'transparent');
+				$('td.row' + tick).css('background-color', 'transparent');
 				$(this).css('background-color', 'green');
 				var rowNumber = this.parentElement.rowIndex +1;
-				that.channel.hits[hit].pitch= (rowNumber * 0.1) +1;
+				that.channel.hits[tick].changePitch((rowNumber * 0.1) +1);
 			},
 		function  (){
 			$(this).css('background-color', 'transparent');
