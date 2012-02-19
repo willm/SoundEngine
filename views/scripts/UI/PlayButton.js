@@ -1,5 +1,4 @@
 	function PlayButton(soundEngine){
-		console.log(soundEngine);
 		this.soundEngine = soundEngine;
 		var playbutton = $('#play_pause'),
 			that = this;
@@ -28,7 +27,6 @@
 	}
 	
 	PlayButton.prototype.startStop = function (){
-		console.log(this.soundEngine);
 		if (this.soundEngine.isPlaying){
 			console.log('Stop');
 			this.soundEngine.stop();

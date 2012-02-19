@@ -13,7 +13,6 @@ SoundEngine.prototype.playSequence = function (){
 	var pat = new PSequence([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], Infinity);
 	this.playEvent = this.audiolet.scheduler.play([pat],0.25,
 		function(pat) {
-			console.log(this.channels);
 			if (pat === 1) {
 				if(numberOfChannels < this.channels.length){
 					for (var i=numberOfChannels; i<this.channels.length; i++) {
