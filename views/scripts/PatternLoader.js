@@ -16,12 +16,11 @@ var ChannelLoader = function  (){
 
 ChannelLoader.prototype.load = function  (channel){
 	//should find a way of using add track click event?
-	var channelDiv = new ChannelDiv(16),
+	var audiloletChannel = new AudioletChannel(channel.hits.length),
 		i;
-	//very dirty, too many .s!
-	for(i=0; i<channelDiv.channel.hits.length; i++){
+	for(i=0; i<channel.hits.length; i++){
 		if(channel.hits[i].isOn){
-			channelDiv.channel.hits[i].div.click();
+			audiloletChannel.hits[i].div.click();
 		}
 	}
 }
