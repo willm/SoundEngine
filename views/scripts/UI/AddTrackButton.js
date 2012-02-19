@@ -1,4 +1,4 @@
-	function AddTrackButton (channelElements, channels, numberOfHits){
+	function AddTrackButton (channels, numberOfHits){
 		var addtrackbutton = $('#add_track');
 
 		addtrackbutton.button({
@@ -8,7 +8,6 @@
 		
 		addtrackbutton.click(function  (){
 			var newChannel = new AudioletChannel(numberOfHits);
-			channelElements.push(newChannel.div);
 			channels.push(newChannel);
 		});
 	}

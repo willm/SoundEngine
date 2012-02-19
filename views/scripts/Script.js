@@ -1,16 +1,10 @@
 $(function(){
 	var soundEngine,
-
-		channelElements = [new BeatLightDiv(16)],
-		channels = [];
+		channels = [new MetronomeChannel(16)];
 
 	new UploadWindow();
+	new AddTrackButton(channels, 16);
 	
-	new AddTrackButton(channelElements, channels, 16);
-	
-	for (var i=0; i<channelElements.length; i++ ) {
-		channels.push(channelElements[i].channel);
-	}
 	soundEngine = new SoundEngine(channels);
 	new PlayButton(soundEngine);
 	new TempoSelector(soundEngine);
