@@ -10,7 +10,6 @@ function SampleList (channel){
 		});
 	list.change(function  (){
 		var selectedSample = $(this).children(':selected').text();
-		console.log(selectedSample);
 		that.channel.loadBuffer('samples/'+selectedSample);
 	});
 	return list;
