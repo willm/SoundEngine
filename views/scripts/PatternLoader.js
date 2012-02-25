@@ -1,12 +1,13 @@
-var PatternLoader = function  (){
+var PatternLoader = function  (channels){
 	this.channelLoader = new ChannelLoader();
+	this.channels = channels;
 }
 
 PatternLoader.prototype.load = function  (pattern){
 	var i;
 	for(i=0;i<pattern.channels.length; i++){
 		var channel = pattern.channels[i];
-		this.channelLoader.load(channel);
+		this.channels.push(this.channelLoader.load(channel));
 	}
 }
 
@@ -16,13 +17,14 @@ var ChannelLoader = function  (){
 
 ChannelLoader.prototype.load = function  (channel){
 	//should find a way of using add track click event?
-	var audiloletChannel = new AudioletChannel(channel.hits.length),
+	var audioletChannel = new AudioletChannel(channel.hits.length),
 		i;
 	for(i=0; i<channel.hits.length; i++){
 		if(channel.hits[i].isOn){
-			audiloletChannel.hits[i].div.click();
+			audioletChannel.hits[i].div.click();
 		}
 	}
+	return audioletChannel;
 }
 
 var HitLoader = function  (){

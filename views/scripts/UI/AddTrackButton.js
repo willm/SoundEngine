@@ -7,7 +7,7 @@
 		});
 		
 		addtrackbutton.click(function  (){
-			var newChannel = new AudioletChannel(numberOfHits);
-			channels.push(newChannel);
+			var audioletChannel = new AudioletChannel(numberOfHits);
+			channels.push(audioletChannel);
 		});
 	}
