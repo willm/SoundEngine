@@ -36,7 +36,7 @@ $(function(){
 				]
 			} , 
 			{ 
-				"sample" : "Snare.wav" , 
+				"sample" : "snar_07a.wav" , 
 				"gain" : 1 , 
 				"_id" : { "$oid" : "4f3da1ac454effe958000004"} , 
 				"hits" : [
