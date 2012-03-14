@@ -5,23 +5,24 @@ describe("Channel", function  (){
 
 	beforeEach(function  (){
 		numberOfHits = 8;
-		channel = new Channel(numberOfHits,"");
+		channel = new AudioletChannel(numberOfHits,"");
 	})
 	
 	
-	it("should initialize an empty bar", function  (){		
+	it("should set up the channels hits correctly", function  (){
+		var i;
 		expect(channel.hits.length).toEqual(numberOfHits);
-		for(var hit in channel.hits){
-			expect(channel.hits[hit]).toEqual(0);
+		for(i=0; i<channel.hits; i++){
+			expect(hits[i].isOn).toBe(false);
+			expect(hits[i].pitch).toEqual(1);
 		}
 	});
 	
-	it("should set the audio context", function(){
-		//var context = channel.context;
-		var contextPrototypes = Object.prototype.toString.call(channel.context);
+	it("should set the right hit", function(){
+		channel.set()
 		expect(contextPrototypes.indexOf('AudioContext')).toNotEqual(-1);
 	});
-	
+	/*
 	it("should set hit", function  (){
 		channel.setHit(0);
 		expect(channel.hits[0]).toEqual(1);
@@ -33,7 +34,7 @@ describe("Channel", function  (){
 		expect(channel.hits[0]).toEqual(0);
 	});
 	
-	/*it("should set the sample buffer", function (){
+	it("should set the sample buffer", function (){
 		channel.loadBuffer("sound.wav");
 		
 	})*/
