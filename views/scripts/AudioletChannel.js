@@ -1,12 +1,14 @@
 var AudioletChannel = function (numberOfTicks){
 	this.numberOfTicks = numberOfTicks;
 	this.audiolet = SingleAudiolet.getInstance();
+	this.sampleManager = new SampleManager();
 	this.hits = [];
 	this.playEvent;
 	for (var i = 0; i<numberOfTicks; i++) {
 		this.hits[i] = new Hit();
 	}
 	this.div = this.setUpDiv();
+	
 }
 
 AudioletChannel.prototype.setHit = function(tick){
@@ -14,26 +16,19 @@ AudioletChannel.prototype.setHit = function(tick){
 }
 
 AudioletChannel.prototype.loadBuffer = function(url) {
-	this.buffer = new AudioletBuffer(1, 0);
-	this.buffer.load(url, false);
-	this.player = new BufferPlayer(this.audiolet, this.buffer, 1, 0, 0);
-	this.trigger = new TriggerControl(this.audiolet,1);
-	this.trigger.connect(this.player, 0, 1);
-	this.gain = new Gain(this.audiolet, 1.0);
-	this.player.connect(this.gain);
-	this.gain.connect(this.audiolet.output);
+	this.sampleManager.load(url);
 }
 
 AudioletChannel.prototype.setVolume = function  (volume){
-	this.gain.gain.setValue(volume);
+	this.sampleManager.changeVolume(volume);
 }
 
-AudioletChannel.prototype.playSound = function (time) {
-	this.trigger.trigger.setValue(1);
-	}
+AudioletChannel.prototype.playSound = function () {
+	this.sampleManager.play();
+}
 	
 AudioletChannel.prototype.setPitch =function  (pitch){
-	this.player.playbackRate.setValue(pitch);
+	this.sampleManager.setPitch(pitch);
 }
 	
 AudioletChannel.prototype.play = function (){

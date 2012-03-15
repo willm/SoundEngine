@@ -5,7 +5,7 @@ $(function(){
 	new UploadWindow();
 	new AddTrackButton(channels, 16);
 	
-	var pl = new PatternLoader(channels);
+	/*var pl = new PatternLoader(channels);
 	pl.load({ 
 		"songId" : 100 , 
 		"_id" : { 
@@ -59,7 +59,7 @@ $(function(){
 				]
 			}
 		]
-	});
+	});*/
 	
 	soundEngine = new SoundEngine(channels);
 	new PlayButton(soundEngine);
