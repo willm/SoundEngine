@@ -1,26 +1,25 @@
 describe("AudioletChannel", function  (){
 
 	var numberOfHits,
-		channel;
+		channel,
 
-	FakeHit = function  (){
-		this.set = function(){};
-	}
+	fakeHit = { set : function(){} },
 	
-	FakeSampleManager = function (){
-		this.load = function (url){};
-		this.changeVolume = function (volume){};
-		this.play = function (){};
-		this.setPitch = function (){};
-	}
+	fakeSampleManager = {
+		load : function (url){},
+		changeVolume : function (volume){},
+		play : function (){},
+		setPitch : function (){}
+	};
 
 	beforeEach(function  (){
 		numberOfHits = 8;
-		channel = new AudioletChannel(numberOfHits,"");
-		for(var i=0; i<channel.hits.length; i++){
-			channel.hits[i] = new FakeHit();
-		};
-		channel.sampleManager = new FakeSampleManager();
+		channel = new AudioletChannel(numberOfHits, 
+		{
+			audiolet : {}, 
+			hit : fakeHit,
+			sampleManager : fakeSampleManager
+		});
 	})
 	
 	
@@ -59,5 +58,13 @@ describe("AudioletChannel", function  (){
 		channel.playSound();
 		
 		expect(channel.sampleManager.play).toHaveBeenCalled();
+	});
+	
+	it("should should set the samples pitch", function (){
+		spyOn(channel.sampleManager, 'setPitch');
+		
+		channel.setPitch(6);
+		
+		expect(channel.sampleManager.setPitch).toHaveBeenCalledWith(6);
 	});
 })

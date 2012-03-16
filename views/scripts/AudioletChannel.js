@@ -1,11 +1,11 @@
-var AudioletChannel = function (numberOfTicks){
+var AudioletChannel = function (numberOfTicks, dependencies){
 	this.numberOfTicks = numberOfTicks;
-	this.audiolet = SingleAudiolet.getInstance();
-	this.sampleManager = new SampleManager();
+	this.audiolet = dependencies ? dependencies.audiolet : SingleAudiolet.getInstance();
+	this.sampleManager = dependencies ? dependencies.sampleManager : new SampleManager();
 	this.hits = [];
 	this.playEvent;
 	for (var i = 0; i<numberOfTicks; i++) {
-		this.hits[i] = new Hit();
+		this.hits[i] = dependencies ? dependencies.hit : new Hit();
 	}
 	this.div = this.setUpDiv();
 	
