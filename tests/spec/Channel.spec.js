@@ -10,19 +10,24 @@ describe("AudioletChannel", function  (){
 		changeVolume : function (volume){},
 		play : function (){},
 		setPitch : function (){}
+	},
+	
+	fakeAudiolet = {
+		scheduler : {
+			play : function (pattern, interval, whatToDo){},
+			stop : function (){}
+		}
 	};
 
 	beforeEach(function  (){
 		numberOfHits = 8;
 		channel = new AudioletChannel(numberOfHits, 
 		{
-			audiolet : {}, 
+			audiolet : fakeAudiolet, 
 			hit : fakeHit,
 			sampleManager : fakeSampleManager
 		});
 	})
-	
-	
 	
 	it("should set up right amount of hits", function  (){
 		expect(channel.hits.length).toEqual(numberOfHits);
@@ -66,5 +71,21 @@ describe("AudioletChannel", function  (){
 		channel.setPitch(6);
 		
 		expect(channel.sampleManager.setPitch).toHaveBeenCalledWith(6);
+	});
+	
+	it("should should play the sequence", function (){
+		spyOn(channel.audiolet.scheduler, 'play');
+		
+		channel.play();
+		
+		expect(channel.audiolet.scheduler.play).toHaveBeenCalled();
+	});
+	
+	it("should should stop playing the sequence", function (){
+		spyOn(channel.audiolet.scheduler, 'stop');
+		
+		channel.stop();
+		
+		expect(channel.audiolet.scheduler.stop).toHaveBeenCalled();
 	});
 })
