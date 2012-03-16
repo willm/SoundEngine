@@ -1,6 +1,6 @@
-function SoundEngine(channels){
+function SoundEngine(channels, dependencies){
 	this.channels = channels;
-	this.audiolet = SingleAudiolet.getInstance();
+	this.audiolet = dependencies ? dependencies.audiolet : SingleAudiolet.getInstance();
 	this.isPlaying = false;
 }
 
