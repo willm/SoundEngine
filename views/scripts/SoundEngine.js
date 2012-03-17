@@ -15,7 +15,7 @@ SoundEngine.prototype.playSequence = function (){
 		function(pat) {
 			if (pat === 1) {
 				if(numberOfChannels < this.channels.length){
-					for (var i=numberOfChannels; i<this.channels.length; i++) {
+					for (var i = numberOfChannels; i < this.channels.length; i++) {
 						this.channels[i].play();
 					}
 					numberOfChannels = this.channels.length;
