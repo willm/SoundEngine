@@ -3,3 +3,4 @@ node_modules/*
 *.ogg
 *.monitor
 views/scripts/master/*
+*.js~
