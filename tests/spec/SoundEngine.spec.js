@@ -31,7 +31,7 @@ describe("SoundEngine", function  (){
 		expect(fakeChannels[1].play).toHaveBeenCalled();
 	});
 	
-	it("should set isPlaying", function (){
+	it("should set isPlaying when playing", function (){
 		soundEngine.playSequence();
 	
 		expect(soundEngine.isPlaying).toBe(true);
