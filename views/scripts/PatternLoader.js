@@ -1,5 +1,5 @@
-var PatternLoader = function  (channels){
-	this.channelLoader = new ChannelLoader();
+var PatternLoader = function  (channels, dependencies){
+	this.channelLoader = dependencies.channelLoader ? dependencies.channelLoader : new ChannelLoader();
 	this.channels = channels;
 }
 
