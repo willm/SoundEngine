@@ -3,12 +3,13 @@ function UploadHandler(){}
 exports.handle = function(req, res){
 var formidable = require("formidable"),
 		fs = require('fs'),
-		path = require('path');
+		path = require('path'),
+		config = require('../config.js');
 
 	var filePath;
 	var form = new formidable.IncomingForm();
 
-	form.uploadDir = path.join(__dirname, 'views','samples');
+	form.uploadDir = config.samples_path; 
 	form.keepExtensions = true;	
 
 	form.parse(req, function(err, fields, files) {

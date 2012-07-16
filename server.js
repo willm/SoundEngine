@@ -1,8 +1,8 @@
 (function  (){
 	var express = require('express'),
-		uploadHandler = require('./UploadHandler.js'),
+		uploadHandler = require('./handlers/UploadHandler.js'),
 		path = require('path'),
-		samplesHandler = require('./SamplesHandler.js'),
+		samplesHandler = require('./handlers/SamplesHandler.js'),
 		//mongoose = require('mongoose'),
 		server,PatternModel;
 //	require('./models/Pattern.js');
