@@ -15,7 +15,7 @@ var	fs = require('fs'),
 	};
 
 desc('concatonate client scripts');
-task('default', [], function(){
+task('combine', [], function(){
 	var dir = 'views/scripts/',
 		 allJsFiles = []
 		filesToCombine = '';
