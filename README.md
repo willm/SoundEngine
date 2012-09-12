@@ -1,12 +1,17 @@
-##Sound Engine is a project atempting to create a fully functioning Digital Audio Workstation (DAW) in the browser.
----
-To run:
-*clone the repository
+##Sound Engine
 
-*npm install
+###To run: 
 
-*jake -f jakefile.js combine
+* clone the repository
 
-*node server.js
+* **`npm install`**
 
-*go to: http://localhost:8080
+* **`jake -f jakefile.js combine`**
+
+* **`node server.js`**
+
+* go to: http://localhost:8080
+
+###To run the tests:
+
+* Open tests/SpecRunner.html
