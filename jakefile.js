@@ -17,13 +17,12 @@ var	fs = require('fs'),
 desc('concatonate client scripts');
 task('combine', [], function(){
 	var dir = 'views/scripts/',
-		 allJsFiles = []
+		allJsFiles = [],
 		filesToCombine = '';
 
 	fs.exists(dir,function(exists){
-		if(exists){
+		if(exists)
 			fs.mkdir(dir);
-		}
 	});
 
 	allJsFiles = getJsFiles(dir) + getJsFiles('views/scripts/UI/');
