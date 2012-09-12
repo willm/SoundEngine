@@ -1,5 +1,7 @@
 ##Sound Engine
 
+Sound Engine is a project atempting to create a fully functioning Digital Audio Workstation (DAW) in the browser.
+
 ###To run: 
 
 * clone the repository
