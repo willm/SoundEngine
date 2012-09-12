@@ -7,10 +7,10 @@ var	fs = require('fs'),
 		var jsFiles = '',
 			files = fs.readdirSync(dir);
 
-		for(var i =0; i<files.length; i++){
-			if(path.extname(files[i]) === '.js')
-				jsFiles += dir + files[i] + ' ';
-		}
+		files.forEach(function(file, i){
+			if(path.extname(file) === '.js')
+				jsFiles += dir + file + ' ';
+		});
 		return jsFiles;
 	};
 
