@@ -1,5 +1,5 @@
 var PatternLoader = function  (channels, dependencies){
-	this.channelLoader = dependencies.channelLoader ? dependencies.channelLoader : new ChannelLoader();
+	this.channelLoader = dependencies ? dependencies.channelLoader : new ChannelLoader();
 	this.channels = channels;
 }
 
@@ -15,9 +15,9 @@ var ChannelLoader = function  (){
 	this.hitLoader = new HitLoader();
 }
 
-ChannelLoader.prototype.load = function  (channel){
+ChannelLoader.prototype.load = function  (channel, deps){
 	//should find a way of using add track click event?
-	var audioletChannel = new AudioletChannel(channel.hits.length),
+	var audioletChannel = deps ? deps.channel : new AudioletChannel(channel.hits.length),
 		i;
 	for(i=0; i<channel.hits.length; i++){
 		if(channel.hits[i].isOn){
