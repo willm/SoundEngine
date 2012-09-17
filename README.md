@@ -8,7 +8,7 @@ Sound Engine is a project atempting to create a fully functioning Digital Audio 
 
 * **`npm install`**
 
-* **`jake -f jakefile.js combine`**
+* **`jake`**
 
 * **`node server.js`**
 
