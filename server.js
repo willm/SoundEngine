@@ -8,11 +8,12 @@
 //	require('./models/Pattern.js');
 //	PatternModel = mongoose.model('PatternModel');
 
-	server = express.createServer();
+	server = express();
 
 	server.configure(function configureAppAndMiddleware() {
 		server.set('view engine', 'jade');
 		server.set('view', path.join(__dirname,'views'));
+		server.set('view options', {layout:false});
 		server.use(express['static'](__dirname + '/views'));
 	});
 
@@ -21,7 +22,7 @@
 		/*PatternModel.find({songId : 100}, function  (err, doc){
 			console.log(doc);
 		});*/
-		res.render('index.jade', {layout:false});
+		res.render('index.jade');//, {layout:false});
 	
 	});
 
@@ -30,7 +31,7 @@
 	});
 
 	server.get('/synth', function  (req, res){
-		res.render('synth.jade', {layout:false});
+		res.render('synth.jade');
 	});
 
 	server.post('/upload',function  (req, res){
