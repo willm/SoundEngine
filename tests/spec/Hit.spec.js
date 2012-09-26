@@ -6,10 +6,6 @@ describe("Hit", function  (){
 		hit = new Hit();
 	})
 
-	it("should break", function(){
-		expect(true).toBe(false);
-	})
-
 	it("should set up the hit correctly", function (){
 		expect(hit.isOn).toBe(false);
 		expect(hit.pitch).toEqual(1);

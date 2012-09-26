@@ -43,7 +43,7 @@ task('test',[], function(){
 			testsFailed.forEach(function(testFailed){
 				console.log(getTestTitle(testFailed));
 				console.log(getTestStackTrace(testFailed) + '\r\n');
-				throw "client tests failed"
+				throw "client tests failed";
 			});
 		}
 	});
