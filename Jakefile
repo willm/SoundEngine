@@ -1,10 +1,8 @@
 var fs = require('fs'),
-	exec = require('child_process').exec,
-	sys = require('sys'),
 	path = require('path'),
 	uglify = require('uglify-js'),
-	Browser = require('zombie'),
-	util = require('util');
+	util = require('util'),
+	aladdin = require('./build/aladdin.js');
 
 var combineJsFilesInDirectory = function(dir){
 	var combinedJsFiles = '',
@@ -23,30 +21,9 @@ var combineAllJsFiles = function(outDir){
 	return combineJsFilesInDirectory(dir) + combineJsFilesInDirectory(dir+'UI/');
 }
 
-var getTestTitle = function(failedSpecElement){
-	return failedSpecElement.childNodes[1].innerHTML;
-}
-
-var getTestStackTrace = function(failedSpecElement){
-	return failedSpecElement.childNodes[2].childNodes[1].innerHTML;
-}
-
 desc('run client unit tests');
 task('test',[], function(){
-	var browser = new Browser();
-	var url = 'file://' + __dirname + '/tests/SpecRunner.html';
-	console.log("running tests from : " + url);
-	browser.visit(url, function(){
-		var testsFailed = browser.queryAll('.spec.failed');
-		if(testsFailed.length != 0){
-			console.log(testsFailed.length + ' tests failed\r\n');
-			testsFailed.forEach(function(testFailed){
-				console.log(getTestTitle(testFailed));
-				console.log(getTestStackTrace(testFailed) + '\r\n');
-				throw "client tests failed";
-			});
-		}
-	});
+	aladdin.rub();
 });
 
 desc('concatonate client scripts');
