@@ -1,3 +1,4 @@
+[![Build Status](https://secure.travis-ci.org/willm/SoundEngine.png)](http://travis-ci.org/willm/SoundEngine)
 ##Sound Engine
 
 Sound Engine is a project atempting to create a fully functioning Digital Audio Workstation (DAW) in the browser.
